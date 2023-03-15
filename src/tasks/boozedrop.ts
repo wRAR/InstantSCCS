@@ -365,7 +365,7 @@ export const BoozeDropQuest: Quest = {
           $effect`Blessing of the Bird`,
           $effect`Crunching Leaves`,
           $effect`Fat Leon's Phat Loot Lyric`,
-          // $effect`Feeling Lost`,
+          $effect`Feeling Lost`,
           $effect`Fortunate Resolve`,
           $effect`Heart of Lavender`,
           $effect`I See Everything Thrice!`,
@@ -377,6 +377,7 @@ export const BoozeDropQuest: Quest = {
           $effect`Nearly All-Natural`,
           $effect`The Spirit of Taking`,
           $effect`Singer's Faithful Ocelot`,
+          $effect`Spice Haze`,
           $effect`Steely-Eyed Squint`,
           $effect`Uncucumbered`,
         ];

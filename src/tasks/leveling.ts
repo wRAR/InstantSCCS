@@ -189,6 +189,7 @@ const usefulEffects: Effect[] = [
   // $effect`Think Win-Lose`,
   // $effect`Confidence of the Votive`,
   $effect`Song of Bravado`,
+  $effect`Scorched Earth`,
   ...statEffects,
 
   // ML
@@ -205,6 +206,11 @@ const usefulEffects: Effect[] = [
   $effect`Aloysius' Antiphon of Aptitude`,
 
   // Spell dmg
+  // Famwt
+  $effect`Curiosity of Br'er Tarrypin`,
+
+  // MP
+  $effect`The Odour of Magick`,
 ];
 
 const prismaticEffects: Effect[] = [
