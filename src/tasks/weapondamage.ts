@@ -3,12 +3,15 @@ import {
   buy,
   create,
   Effect,
+  elementalResistance,
   equippedItem,
+  haveEffect,
   haveEquipped,
   inebrietyLimit,
   myBasestat,
   myClass,
   myHash,
+  myHp,
   myInebriety,
   myMaxhp,
   myMeat,
@@ -26,6 +29,7 @@ import {
   $class,
   $effect,
   $effects,
+  $element,
   $familiar,
   $item,
   $location,
@@ -206,6 +210,24 @@ export const WeaponDamageQuest: Quest = {
         outfit(get("instant_stickKnifeOutfit"));
       },
       limit: { tries: 1 },
+    },
+    {
+      name: "Cast Deep Dark Visions",
+      // you need more turns of the effect than your wdmg test length
+      completed: () =>
+        have($effect`Cowrruption`) ||
+        haveEffect($effect`Visions of the Deep Dark Deeps`) >= 5 ||
+        !have($skill`Deep Dark Visions`),
+      do: (): void => {
+        const resist = 1 - elementalResistance($element`spooky`) / 100;
+        const neededHp = Math.max(500, myMaxhp() * 4 * resist);
+        if (myMaxhp() < neededHp) throw `Not enough HP for Deep Dark Visions.`;
+        while (myHp() < neededHp) useSkill($skill`Cannelloni Cocoon`);
+        useSkill($skill`Deep Dark Visions`);
+      },
+      outfit: { modifier: "HP 500max, Spooky Resistance", familiar: $familiar`Exotic Parrot` },
+      effects: $effects`Astral Shell, Elemental Saucesphere`,
+      limit: { tries: 3 },
     },
     {
       name: "Test",
