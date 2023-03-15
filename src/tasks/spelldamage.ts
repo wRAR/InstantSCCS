@@ -30,6 +30,13 @@ export const SpellDamageQuest: Quest = {
   completed: () => CommunityService.SpellDamage.isDone(),
   tasks: [
     {
+      name: "Buy obsidian nutcracker",
+      completed: () => have($item`obsidian nutcracker`),
+      do: () => buy($item`obsidian nutcracker`, 1),
+      outfit: { pants: $item`designer sweatpants` },
+      limit: { tries: 1 },
+    },
+    {
       name: "Simmer",
       completed: () => have($effect`Simmering`) || !have($skill`Simmer`),
       do: () => useSkill($skill`Simmer`),
@@ -59,7 +66,6 @@ export const SpellDamageQuest: Quest = {
     {
       name: "Test",
       prepare: (): void => {
-        if (!have($item`obsidian nutcracker`)) buy($item`obsidian nutcracker`, 1);
         const usefulEffects: Effect[] = [
           $effect`AAA-Charged`,
           $effect`Arched Eyebrow of the Archmage`,
