@@ -977,6 +977,13 @@ export const LevelingQuest: Quest = {
         unbreakableUmbrella();
         garbageShirt();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        const needLoveSong =
+          itemAmount($item`love song of icy revenge`) +
+            Math.floor(haveEffect($effect`Cold Hearted`) / 5) <
+          4;
+        while (needLoveSong && myMp() >= mpCost($skill`Summon Love Song`) + 300) {
+          useSkill($skill`Summon Love Song`);
+        }
         restoreMp(50);
         if (!have($effect`Everything Looks Red`) && !have($item`red rocket`)) {
           if (myMeat() >= 250) buy($item`red rocket`, 1);
