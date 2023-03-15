@@ -461,11 +461,38 @@ export function getSynthExpBuff(): void {
 const allTomes = $skills`Summon Resolutions, Summon Love Song, Summon Candy Heart, Summon Taffy, Summon BRICKOs, Summon Party Favor, Summon Dice`;
 const availableTomes = allTomes.filter((tome) => have(tome));
 export function chooseLibram(): Skill {
-  const needLoveSong =
-    have($skill`Summon Love Song`) &&
+  // X HP Regen, +X Muscle
+  const needVagueAmbiguity =
+    !CommunityService.Muscle.isDone() &&
+    itemAmount($item`love song of vague ambiguity`) +
+      Math.floor(haveEffect($effect`Broken Heart`) / 5) <
+      4;
+
+  // +X/2 MP Regen, +X Myst
+  const needSmolderingPassion =
+    !CommunityService.Mysticality.isDone() &&
+    itemAmount($item`love song of smoldering passion`) +
+      Math.floor(haveEffect($effect`Fiery Heart`) / 5) <
+      4;
+
+  // +X/2 Familiar Weight, +X Moxie
+  const needIcyRevenge =
+    !CommunityService.FamiliarWeight.isDone() &&
     itemAmount($item`love song of icy revenge`) +
       Math.floor(haveEffect($effect`Cold Hearted`) / 5) <
       4;
+
+  // +X% Items, +X Myst
+  const needDisturbingObsession =
+    !CommunityService.BoozeDrop.isDone() &&
+    itemAmount($item`love song of disturbing obsession`) +
+      Math.floor(haveEffect($effect`Withered Heart`) / 5) <
+      4;
+
+  const needLoveSong =
+    have($skill`Summon Love Song`) &&
+    (needVagueAmbiguity || needIcyRevenge || needDisturbingObsession || needSmolderingPassion);
+
   const needCandyHeart =
     have($skill`Summon Candy Heart`) &&
     ((!have($item`green candy heart`) && !have($effect`Heart of Green`)) ||

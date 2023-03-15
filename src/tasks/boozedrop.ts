@@ -11,6 +11,7 @@ import {
   equip,
   faxbot,
   getWorkshed,
+  haveEffect,
   hermit,
   inebrietyLimit,
   inMuscleSign,
@@ -53,7 +54,7 @@ import {
   setConfiguration,
   Station,
 } from "libram/dist/resources/2022/TrainSet";
-import { handleCustomPulls, logTestSetup, tryAcquiringEffect, wishFor } from "../lib";
+import { burnLibram, handleCustomPulls, logTestSetup, tryAcquiringEffect, wishFor } from "../lib";
 import { sugarItemsAboutToBreak } from "../outfit";
 import { CombatStrategy } from "grimoire-kolmafia";
 import Macro, { haveFreeBanish } from "../combat";
@@ -382,6 +383,15 @@ export const BoozeDropQuest: Quest = {
           $effect`Uncucumbered`,
         ];
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
+        burnLibram(300);
+        if (have($item`love song of disturbing obsession`))
+          use(
+            Math.min(
+              4 - Math.floor(haveEffect($effect`Withered Heart`) / 5),
+              itemAmount($item`love song of disturbing obsession`),
+            ),
+            $item`love song of disturbing obsession`,
+          );
 
         if (have($familiar`Trick-or-Treating Tot`) && have($item`li'l ninja costume`)) {
           useFamiliar($familiar`Trick-or-Treating Tot`);

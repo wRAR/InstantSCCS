@@ -1,4 +1,15 @@
-import { buy, cliExecute, create, Effect, itemAmount, print, Stat, use, useSkill } from "kolmafia";
+import {
+  buy,
+  cliExecute,
+  create,
+  Effect,
+  haveEffect,
+  itemAmount,
+  print,
+  Stat,
+  use,
+  useSkill,
+} from "kolmafia";
 import {
   $coinmaster,
   $effect,
@@ -16,6 +27,7 @@ import {
 } from "libram";
 import { Quest } from "../engine/task";
 import {
+  burnLibram,
   handleCustomPulls,
   logTestSetup,
   mainStat,
@@ -114,6 +126,15 @@ export const MuscleQuest: Quest = {
         ) {
           create($item`philter of phorce`, 1);
         }
+        burnLibram(300);
+        // if (have($item`love song of vague ambiguity`))
+        //   use(
+        //     Math.min(
+        //       4 - Math.floor(haveEffect($effect`Broken Heart`) / 5),
+        //       itemAmount($item`love song of vague ambiguity`)
+        //     ),
+        //     $item`love song of vague ambiguity`
+        //   );
         const usefulEffects: Effect[] = [
           $effect`Big`,
           $effect`Disdain of the War Snapper`,
@@ -170,6 +191,15 @@ export const MysticalityQuest: Quest = {
         ) {
           create($item`ointment of the occult`, 1);
         }
+        burnLibram(300);
+        if (have($item`love song of smoldering passion`))
+          use(
+            Math.min(
+              4 - Math.floor(haveEffect($effect`Fiery Heart`) / 5),
+              itemAmount($item`love song of smoldering passion`),
+            ),
+            $item`love song of smoldering passion`,
+          );
         const usefulEffects: Effect[] = [
           $effect`Big`,
           $effect`Disdain of She-Who-Was`,
@@ -238,6 +268,7 @@ export const MoxieQuest: Quest = {
       completed: () => CommunityService.Moxie.isDone(),
       prepare: (): void => {
         useBalancerForTest($stat`Moxie`);
+        burnLibram(300);
         const usefulEffects: Effect[] = [
           // $effect`Amazing`,
           $effect`Big`,

@@ -32,6 +32,7 @@ import Macro from "../combat";
 import { avoidDaylightShavingsHelm, sugarItemsAboutToBreak } from "../outfit";
 import { Quest } from "../engine/task";
 import {
+  burnLibram,
   chooseHeaviestEquippedFamiliar,
   handleCustomPulls,
   logTestSetup,
@@ -113,6 +114,7 @@ export const FamiliarWeightQuest: Quest = {
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
         handleCustomPulls("instant_famTestPulls", famTestMaximizerString);
 
+        burnLibram(300);
         if (have($item`love song of icy revenge`))
           use(
             Math.min(

@@ -1252,6 +1252,7 @@ export const LevelingQuest: Quest = {
         unbreakableUmbrella();
         garbageShirt();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
       },
       ready: () => getKramcoWandererChance() >= 1.0,
@@ -1347,6 +1348,7 @@ export const LevelingQuest: Quest = {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
         unbreakableUmbrella();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
       },
       completed: () => get("_godLobsterFights") >= 3 || !have($familiar`God Lobster`),
@@ -1370,6 +1372,7 @@ export const LevelingQuest: Quest = {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
         unbreakableUmbrella();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
       },
       completed: () => get("_eldritchHorrorEvoked") || !have($skill`Evoke Eldritch Horror`),
@@ -1389,6 +1392,7 @@ export const LevelingQuest: Quest = {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
         unbreakableUmbrella();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
       },
       completed: () =>
@@ -1450,6 +1454,7 @@ export const LevelingQuest: Quest = {
         unbreakableUmbrella();
         garbageShirt();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
         if (!have($effect`Everything Looks Red`) && !have($item`red rocket`)) {
           if (myMeat() >= 250) buy($item`red rocket`, 1);
@@ -1710,6 +1715,7 @@ export const LevelingQuest: Quest = {
         unbreakableUmbrella();
         garbageShirt();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
       },
       completed: () =>
@@ -1751,6 +1757,7 @@ export const LevelingQuest: Quest = {
         garbageShirt();
         docBag();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        burnLibram(300);
         restoreMp(50);
       },
       outfit: (): OutfitSpec => {
