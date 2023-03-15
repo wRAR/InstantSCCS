@@ -68,6 +68,7 @@ export const FamiliarWeightQuest: Quest = {
           $effect`Do I Know You From Somewhere?`,
           $effect`Empathy`,
           $effect`Fidoxene`,
+          $effect`Heart of Green`,
           $effect`Leash of Linguini`,
           $effect`Puzzle Champ`,
           $effect`Shortly Stacked`,
