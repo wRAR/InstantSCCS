@@ -115,7 +115,8 @@ export const DonateQuest: Quest = {
     },
     {
       name: "Shrug Negative Effects",
-      completed: () => !have($effect`Feeling Lost`) && !have($effect`Cowrruption`),
+      completed: () =>
+        !have($effect`Feeling Lost`) && !have($effect`Cowrruption`) && !have($effect`Cold Hearted`),
       do: (): void => {
         for (const ef of $effects`Feeling Lost, Cowrruption, Cold Hearted`) {
           if (have(ef)) uneffect(ef);
