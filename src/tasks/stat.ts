@@ -1,4 +1,4 @@
-import { create, Effect, print } from "kolmafia";
+import { create, Effect, haveEffect, itemAmount, print, use } from "kolmafia";
 import {
   $effect,
   $effects,
@@ -11,7 +11,7 @@ import {
   uneffect,
 } from "libram";
 import { Quest } from "../engine/task";
-import { logTestSetup, tryAcquiringEffect } from "../lib";
+import { logTestSetup, summonLibrams, tryAcquiringEffect } from "../lib";
 
 export const HPQuest: Quest = {
   name: "HP",
@@ -78,6 +78,15 @@ export const MuscleQuest: Quest = {
         ) {
           create($item`philter of phorce`, 1);
         }
+        summonLibrams();
+        if (have($item`love song of vague ambiguity`))
+          use(
+            Math.min(
+              4 - Math.floor(haveEffect($effect`Broken Heart`) / 5),
+              itemAmount($item`love song of vague ambiguity`)
+            ),
+            $item`love song of vague ambiguity`
+          );
         const usefulEffects: Effect[] = [
           $effect`Big`,
           $effect`Disdain of the War Snapper`,

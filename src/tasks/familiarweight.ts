@@ -1,5 +1,16 @@
 import { CombatStrategy } from "grimoire-kolmafia";
-import { cliExecute, create, Effect, print, toInt, use, useFamiliar, visitUrl } from "kolmafia";
+import {
+  cliExecute,
+  create,
+  Effect,
+  haveEffect,
+  itemAmount,
+  print,
+  toInt,
+  use,
+  useFamiliar,
+  visitUrl,
+} from "kolmafia";
 import {
   $effect,
   $familiar,
@@ -12,7 +23,7 @@ import {
   have,
 } from "libram";
 import { Quest } from "../engine/task";
-import { logTestSetup, tryAcquiringEffect } from "../lib";
+import { logTestSetup, summonLibrams, tryAcquiringEffect } from "../lib";
 import Macro from "../combat";
 import { chooseHeaviestFamiliar, sugarItemsAboutToBreak } from "../engine/outfit";
 
@@ -100,6 +111,15 @@ export const FamiliarWeightQuest: Quest = {
 
           cliExecute("maximize familiar weight");
         }
+        summonLibrams();
+        if (have($item`love song of icy revenge`))
+          use(
+            Math.min(
+              4 - Math.floor(haveEffect($effect`Cold Hearted`) / 5),
+              itemAmount($item`love song of icy revenge`)
+            ),
+            $item`love song of icy revenge`
+          );
       },
       do: (): void => {
         const maxTurns = get("instant_famTestTurnLimit", 50);

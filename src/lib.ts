@@ -2,6 +2,7 @@ import {
   cliExecute,
   Effect,
   getCampground,
+  haveEffect,
   holiday,
   Item,
   itemAmount,
@@ -18,8 +19,20 @@ import {
   toSkill,
   toStat,
   use,
+  useSkill,
 } from "kolmafia";
-import { $effect, $familiar, $item, $items, $stat, CommunityService, get, have, set } from "libram";
+import {
+  $effect,
+  $familiar,
+  $item,
+  $items,
+  $skill,
+  $stat,
+  CommunityService,
+  get,
+  have,
+  set,
+} from "libram";
 import { printModtrace } from "libram/dist/modifier";
 import { forbiddenEffects } from "./resources";
 
@@ -230,4 +243,35 @@ export function haveCBBIngredients(fullCheck: boolean): boolean {
     itemAmount($item`Vegetable of Jarlsberg`) >= vegetable &&
     itemAmount($item`St. Sneaky Pete's Whey`) >= whey
   );
+}
+
+export function summonLibrams(): void {
+  // only Love Songs are supported
+  if (!have($skill`Summon Love Song`)) return;
+
+  // X HP Regen, +X Muscle
+  const needVagueAmbiguity =
+    !CommunityService.Muscle.isDone() &&
+    itemAmount($item`love song of vague ambiguity`) +
+      Math.floor(haveEffect($effect`Broken Heart`) / 5) <
+      4;
+
+  // +X/2 Familiar Weight, +X Moxie
+  const needIcyRevenge =
+    !CommunityService.FamiliarWeight.isDone() &&
+    itemAmount($item`love song of icy revenge`) +
+      Math.floor(haveEffect($effect`Cold Hearted`) / 5) <
+      4;
+
+  // +X% Items, +X Myst
+  const needDisturbingObsession =
+    !CommunityService.BoozeDrop.isDone() &&
+    itemAmount($item`love song of disturbing obsession`) +
+      Math.floor(haveEffect($effect`Withered Heart`) / 5) <
+      4;
+
+  const needLoveSong = needVagueAmbiguity || needIcyRevenge || needDisturbingObsession;
+  while (needLoveSong && myMp() >= mpCost($skill`Summon Love Song`) + 300) {
+    useSkill($skill`Summon Love Song`);
+  }
 }
