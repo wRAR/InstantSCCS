@@ -115,6 +115,9 @@ const usefulEffects: Effect[] = [
 
   // Spell dmg
   $effect`Carol of the Hells`,
+
+  // Famwt
+  $effect`Curiosity of Br'er Tarrypin`,
 ];
 
 export function powerlevelingLocation(): Location {
