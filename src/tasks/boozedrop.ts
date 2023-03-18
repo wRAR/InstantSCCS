@@ -197,6 +197,7 @@ export const BoozeDropQuest: Quest = {
           $effect`Crunching Leaves`,
           $effect`Fat Leon's Phat Loot Lyric`,
           $effect`Feeling Lost`,
+          $effect`Heart of Lavender`,
           $effect`items.enh`,
           $effect`One Very Clear Eye`,
           $effect`Nearly All-Natural`,
