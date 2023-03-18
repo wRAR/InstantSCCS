@@ -190,6 +190,16 @@ export const BoozeDropQuest: Quest = {
       limit: { tries: 1 },
     },
     {
+      name: "Drink stillsuit distillate",
+      completed: () => have($effect`Buzzed on Distillate`) || myInebriety() >= inebrietyLimit(),
+      do: (): void => {
+        if (myInebriety() < inebrietyLimit()) {
+          cliExecute("drink stillsuit distillate");
+        }
+      },
+      limit: { tries: 1 },
+    },
+    {
       name: "Test",
       prepare: (): void => {
         const usefulEffects: Effect[] = [
