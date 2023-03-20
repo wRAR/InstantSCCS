@@ -135,6 +135,7 @@ export const WeaponDamageQuest: Quest = {
           $effect`Imported Strength`,
           $effect`Jackasses' Symphony of Destruction`,
           $effect`Lack of Body-Building`,
+          $effect`Paging Betty`,
           $effect`Pronounced Potency`,
           $effect`Rage of the Reindeer`,
           $effect`Rictus of Yeg`,
