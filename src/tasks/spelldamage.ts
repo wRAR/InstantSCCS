@@ -209,6 +209,7 @@ export const SpellDamageQuest: Quest = {
           $effect`Imported Strength`,
           $effect`Jackasses' Symphony of Destruction`,
           $effect`Mental A-cue-ity`,
+          $effect`Paging Betty`,
           $effect`Pisces in the Skyces`,
           $effect`Song of Sauce`,
           $effect`Sigils of Yeg`,
