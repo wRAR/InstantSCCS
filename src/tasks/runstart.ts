@@ -35,6 +35,7 @@ import {
   use,
   useSkill,
   visitUrl,
+  wait,
 } from "kolmafia";
 import {
   $effect,
@@ -51,6 +52,7 @@ import {
   getKramcoWandererChance,
   have,
   Pantogram,
+  set,
   SongBoom,
 } from "libram";
 import { canConfigure, setConfiguration, Station } from "libram/dist/resources/2022/TrainSet";
@@ -551,6 +553,31 @@ export const RunStartQuest: Quest = {
         offhand: $item`Kramco Sausage-o-Matic™`,
       }),
       combat: new CombatStrategy().macro(Macro.default()),
+    },
+    {
+      name: "Fortune Teller Consult",
+      completed: () =>
+        get("_clanFortuneConsultUses", 0) >= 3 || get("_InstantSCCSClanFortuneAttempts", 0) >= 3,
+      do: (): void => {
+        cliExecute("clanhop hell");
+        switch (get("_clanFortuneConsultsUses", 0)) {
+          case 0:
+            cliExecute("fortune cheesefax bad bad bad");
+            break;
+          case 1:
+            cliExecute("fortune cheesefax bad bad bad");
+            break;
+          case 2:
+            cliExecute("fortune cheesefax pizza batman thick");
+            break;
+          default:
+            break;
+        }
+        wait(5);
+        set("_InstantSCCSClanFortuneAttempts", 1 + get("_InstantSCCSClanFortuneAttempts", 0));
+        cliExecute("clanhop reddit");
+        cliExecute("refresh inv");
+      },
     },
   ],
 };
