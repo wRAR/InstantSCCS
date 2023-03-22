@@ -65,6 +65,11 @@ const resources: Resource[] = [
     () => "Do not eat a Plain Calzone",
     $effects`Angering Pizza Purists`
   ),
+  new Resource(
+    "instant_saveBorisBread",
+    () => "Do not eat a Boris's bread",
+    $effects`Inspired Chef`
+  ),
   new Resource("instant_saveBeesKnees", () => "Do not buy and drink Bee's Knees"),
   new Resource("instant_saveSockdollager", () => "Do not buy and drink a sockdollager"),
   new Resource("instant_saveBorisBeer", () => "Do not drink a Boris's Beer for the hot test"),

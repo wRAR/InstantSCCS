@@ -222,6 +222,7 @@ export function haveCBBIngredients(fullCheck: boolean): boolean {
     yeast += 2;
     whey += 2;
   }
+  if (!get("instant_saveBorisBread", false) && !have($effect`Inspired Chef`)) yeast += 2;
   if (fullCheck) {
     if (!get("instant_saveRicottaCasserole", false) && !have($effect`Pretty Delicious`)) {
       vegetable += 2;
