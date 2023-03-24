@@ -277,7 +277,7 @@ export const RunStartQuest: Quest = {
       completed: () => !have($item`sugar sheet`),
       do: (): void => {
         const nextMissingSugarItem =
-          $items`sugar shorts, sugar chapeau, sugar shank`.find((it) => !have(it)) || $item`none`;
+          $items`sugar chapeau, sugar shield, sugar shorts`.find((it) => !have(it)) || $item`none`;
         create(nextMissingSugarItem);
       },
       limit: { tries: 3 },

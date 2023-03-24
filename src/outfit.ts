@@ -42,7 +42,8 @@ export function sugarItemsAboutToBreak(): Item[] {
       const itemAboutToBreak = parseInt(get(`sugarCounter${id.toString()}`), 10) >= 30;
       return itemAboutToBreak ? [item] : [];
     })
-    .reduce((a, b) => a.concat(b));
+    .reduce((a, b) => a.concat(b))
+    .concat([$item`sugar shield`]);
 }
 
 export function avoidDaylightShavingsHelm(): boolean {
