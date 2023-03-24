@@ -37,7 +37,6 @@ export function sugarItemsAboutToBreak(): Item[] {
   const sugarItems = [
     { id: 4180, item: $item`sugar shank` },
     { id: 4181, item: $item`sugar chapeau` },
-    { id: 4182, item: $item`sugar shorts` },
   ];
   return sugarItems
     .map((entry) => {
@@ -45,7 +44,8 @@ export function sugarItemsAboutToBreak(): Item[] {
       const itemAboutToBreak = parseInt(get(`sugarCounter${id.toString()}`), 10) >= 30;
       return itemAboutToBreak ? [item] : [];
     })
-    .reduce((a, b) => a.concat(b));
+    .reduce((a, b) => a.concat(b))
+    .concat([$item`sugar shield`]);
 }
 
 function nanorhino(allowAttackingFamiliars = false): Familiar {
