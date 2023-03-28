@@ -270,7 +270,7 @@ export const MoxieQuest: Quest = {
         useBalancerForTest($stat`Moxie`);
         burnLibram(300);
         const usefulEffects: Effect[] = [
-          // $effect`Amazing`,
+          $effect`Amazing`,
           $effect`Big`,
           $effect`Blessing of the Bird`,
           $effect`Blubbered Up`,

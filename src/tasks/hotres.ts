@@ -152,7 +152,7 @@ export const HotResQuest: Quest = {
           cliExecute("Briefcase e hot");
 
         const usefulEffects: Effect[] = [
-          $effect`Amazing`,
+          // $effect`Amazing`,
           $effect`Astral Shell`,
           $effect`Egged On`,
           $effect`Elemental Saucesphere`,
