@@ -82,6 +82,7 @@ export const MuscleQuest: Quest = {
           $effect`Big`,
           $effect`Go Get 'Em, Tiger!`,
           $effect`Hulkien`,
+          $effect`Macaroni Coating`,
           $effect`Quiet Determination`,
           $effect`Power Ballad of the Arrowsmith`,
           $effect`Phorcefullness`,
