@@ -67,7 +67,13 @@ import {
 } from "libram";
 import { CombatStrategy } from "grimoire-kolmafia";
 import { haveCBBIngredients, targetBaseMyst, tryAcquiringEffect, wishFor } from "../lib";
-import { baseOutfit, docBag, garbageShirt, unbreakableUmbrella } from "../engine/outfit";
+import {
+  baseOutfit,
+  docBag,
+  garbageShirt,
+  sugarItemsAboutToBreak,
+  unbreakableUmbrella,
+} from "../engine/outfit";
 import Macro from "../combat";
 import { forbiddenEffects } from "../resources";
 import { mapMonster } from "libram/dist/resources/2020/Cartography";
@@ -1085,6 +1091,58 @@ export const LevelingQuest: Quest = {
       combat: new CombatStrategy().macro(Macro.default()),
       outfit: baseOutfit,
       post: (): void => {
+        sendAutumnaton();
+        sellMiscellaneousItems();
+      },
+      limit: { tries: 1 },
+    },
+    {
+      name: "Witchess Witch",
+      prepare: (): void => {
+        unbreakableUmbrella();
+        cliExecute("umbrella dr");
+        garbageShirt();
+        usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        const usefulEffectsWitch: Effect[] = [
+          // elemental damage
+          $effect`Frostbeard`,
+          $effect`Pyromania`,
+          $effect`Rotten Memories`,
+          $effect`Your Fifteen Minutes`,
+          $effect`Bendin' Hell`,
+          // weapon damage
+          $effect`Carol of the Bulls`,
+          $effect`Disdain of the War Snapper`,
+          $effect`Jackasses' Symphony of Destruction`,
+          $effect`Rage of the Reindeer`,
+          $effect`Song of the North`,
+          // always hit
+          $effect`Comic Violence`,
+          // DA
+          $effect`Feeling Peaceful`,
+          $effect`Astral Shell`,
+        ];
+        usefulEffectsWitch.forEach((ef) => tryAcquiringEffect(ef, true));
+        restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
+      },
+      completed: () =>
+        CombatLoversLocket.monstersReminisced().includes($monster`Witchess Witch`) ||
+        !CombatLoversLocket.availableLocketMonsters().includes($monster`Witchess Witch`) ||
+        get("instant_saveLocketWitchessWitch", false),
+      do: () => CombatLoversLocket.reminisce($monster`Witchess Witch`),
+      combat: new CombatStrategy().macro(Macro.attack().repeat()),
+      outfit: () => ({
+        weapon: $item`Fourth of May Cosplay Saber`,
+        //offhand: $item`dented scepter`,
+        shirt: $item`makeshift garbage shirt`,
+        pants: $item`astral trousers`,
+        acc1: $item`codpiece`,
+        familiar: $familiar`Shorter-Order Cook`,
+        modifier: "mys, -equip tinsel tights, -equip wad of used tape",
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      post: (): void => {
+        uneffect($effect`Jackasses' Symphony of Destruction`);
         sendAutumnaton();
         sellMiscellaneousItems();
       },
