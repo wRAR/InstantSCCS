@@ -80,6 +80,7 @@ export const MuscleQuest: Quest = {
         }
         const usefulEffects: Effect[] = [
           $effect`Big`,
+          $effect`Feeling Excited`,
           $effect`Go Get 'Em, Tiger!`,
           $effect`Hulkien`,
           $effect`Macaroni Coating`,
@@ -125,6 +126,7 @@ export const MysticalityQuest: Quest = {
       prepare: (): void => {
         const usefulEffects: Effect[] = [
           $effect`Big`,
+          $effect`Feeling Excited`,
           $effect`Glittering Eyelashes`,
           $effect`Hulkien`,
           $effect`The Magical Mojomuscular Melody`,
@@ -182,6 +184,7 @@ export const MoxieQuest: Quest = {
           $effect`Butt-Rock Hair`,
           $effect`Disco Fever`,
           $effect`Disco State of Mind`,
+          $effect`Feeling Excited`,
           $effect`Hulkien`,
           $effect`The Moxious Madrigal`,
           $effect`Triple-Sized`,
