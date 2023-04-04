@@ -140,6 +140,7 @@ const resources: Resource[] = [
   new Resource("instant_saveMayday", () => "Do not use your Mayday survival package"),
   new Resource("instant_saveLocketRedSkeleton", () => "Do not reminisce a Red Skeleton"),
   new Resource("instant_saveLocketWitchessKing", () => "Do not reminisce a Witchess King"),
+  new Resource("instant_saveLocketWitchessWitch", () => "Do not reminisce a Witchess Witch"),
   new Resource(
     "instant_saveLocketFactoryWorker",
     () => "Do not reminisce a Factory Worker (female)"
