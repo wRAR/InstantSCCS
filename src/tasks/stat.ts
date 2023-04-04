@@ -80,6 +80,7 @@ export const MuscleQuest: Quest = {
         }
         const usefulEffects: Effect[] = [
           $effect`Big`,
+          $effect`Disdain of the War Snapper`,
           $effect`Feeling Excited`,
           $effect`Go Get 'Em, Tiger!`,
           $effect`Hulkien`,
