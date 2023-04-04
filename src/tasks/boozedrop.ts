@@ -73,25 +73,25 @@ export const BoozeDropQuest: Quest = {
       },
       limit: { tries: 1 },
     },
-    {
-      name: "Acquire Clover",
-      completed: () => have($item`11-leaf clover`) || get("_cloversPurchased") >= 2,
-      do: (): void => {
-        buy(1, $item`chewing gum on a string`);
-        use(1, $item`chewing gum on a string`);
-        hermit($item`11-leaf clover`, 1);
-      },
-      limit: { tries: 50 },
-    },
-    {
-      name: "Get Cyclops Eyedrops",
-      completed: () => have($item`cyclops eyedrops`) || have($effect`One Very Clear Eye`),
-      do: (): void => {
-        if (!have($effect`Lucky!`)) use($item`11-leaf clover`);
-        if (!have($item`cyclops eyedrops`)) adv1($location`The Limerick Dungeon`, -1);
-      },
-      limit: { tries: 1 },
-    },
+    // {
+    //   name: "Acquire Clover",
+    //   completed: () => have($item`11-leaf clover`) || get("_cloversPurchased") >= 2,
+    //   do: (): void => {
+    //     buy(1, $item`chewing gum on a string`);
+    //     use(1, $item`chewing gum on a string`);
+    //     hermit($item`11-leaf clover`, 1);
+    //   },
+    //   limit: { tries: 50 },
+    // },
+    // {
+    //   name: "Get Cyclops Eyedrops",
+    //   completed: () => have($item`cyclops eyedrops`) || have($effect`One Very Clear Eye`),
+    //   do: (): void => {
+    //     if (!have($effect`Lucky!`)) use($item`11-leaf clover`);
+    //     if (!have($item`cyclops eyedrops`)) adv1($location`The Limerick Dungeon`, -1);
+    //   },
+    //   limit: { tries: 1 },
+    // },
     {
       name: "Fax Ungulith",
       completed: () => get("_photocopyUsed"),
