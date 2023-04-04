@@ -112,7 +112,13 @@ import {
   wishFor,
   xpWishEffect,
 } from "../lib";
-import { baseOutfit, docBag, garbageShirt, unbreakableUmbrella } from "../outfit";
+import {
+  baseOutfit,
+  docBag,
+  garbageShirt,
+  sugarItemsAboutToBreak,
+  unbreakableUmbrella,
+} from "../outfit";
 import Macro, { haveFreeBanish } from "../combat";
 import { forbiddenEffects } from "../resources";
 import { mapMonster } from "libram/dist/resources/2020/Cartography";
@@ -1741,6 +1747,74 @@ export const LevelingQuest: Quest = {
       ),
       outfit: baseOutfit,
       post: (): void => {
+        sendAutumnaton();
+        sellMiscellaneousItems();
+      },
+      limit: { tries: 1 },
+    },
+    {
+      name: "Witchess Witch",
+      prepare: (): void => {
+        unbreakableUmbrella();
+        // cliExecute("umbrella dr");
+        garbageShirt();
+        if (have($item`magical sausage casing`) && !have($item`magical sausage`))
+          create($item`magical sausage`, 1);
+        eat($item`magical sausage`, 1);
+        usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        const usefulEffectsWitch: Effect[] = [
+          // elemental damage
+          $effect`Frostbeard`,
+          $effect`Pyromania`,
+          $effect`Rotten Memories`,
+          $effect`Your Fifteen Minutes`,
+          $effect`Bendin' Hell`,
+          // weapon damage
+          $effect`Carol of the Bulls`,
+          $effect`Disdain of the War Snapper`,
+          $effect`Jackasses' Symphony of Destruction`,
+          $effect`Rage of the Reindeer`,
+          $effect`Song of the North`,
+          $effect`Tenacity of the Snapper`,
+          // always hit
+          $effect`Comic Violence`,
+          // defense
+          $effect`Astral Shell`,
+          $effect`Feeling Peaceful`,
+          $effect`Flimsy Shield of the Pastalord`,
+          $effect`Ghostly Shell`,
+          $effect`Jalapeño Saucesphere`,
+        ];
+        usefulEffectsWitch.forEach((ef) => tryAcquiringEffect(ef, true));
+        restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
+        restoreMp(100);
+      },
+      completed: () =>
+        CombatLoversLocket.monstersReminisced().includes($monster`Witchess Witch`) ||
+        !CombatLoversLocket.availableLocketMonsters().includes($monster`Witchess Witch`) ||
+        get("instant_saveLocketWitchessWitch", false),
+      do: () => CombatLoversLocket.reminisce($monster`Witchess Witch`),
+      combat: new CombatStrategy().macro(
+        Macro.trySkill($skill`Cincho: Confetti Extravaganza`)
+          .while_(
+            `!mpbelow ${mpCost($skill`Lunging Thrust-Smack`)}`,
+            Macro.skill($skill`Lunging Thrust-Smack`),
+          )
+          .attack()
+          .repeat(),
+      ),
+      outfit: () => ({
+        weapon: $item`dented scepter`,
+        offhand: $item`unbreakable umbrella`,
+        shirt: $item`makeshift garbage shirt`,
+        pants: $item`astral trousers`,
+        acc2: $item`Cincho de Mayo`,
+        familiar: $familiar`Shorter-Order Cook`,
+        modifier: `${mainStatMaximizerStr}, -equip tinsel tights, -equip wad of used tape`,
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      post: (): void => {
+        uneffect($effect`Jackasses' Symphony of Destruction`);
         sendAutumnaton();
         sellMiscellaneousItems();
       },
