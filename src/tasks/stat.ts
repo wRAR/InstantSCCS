@@ -185,6 +185,7 @@ export const MoxieQuest: Quest = {
           $effect`Hulkien`,
           $effect`The Moxious Madrigal`,
           $effect`Triple-Sized`,
+          $effect`Penne Fedora`,
           $effect`Pomp & Circumsands`,
           $effect`Quiet Desperation`,
           $effect`Song of Bravado`,
