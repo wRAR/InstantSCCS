@@ -10,6 +10,7 @@ import {
   equip,
   faxbot,
   getWorkshed,
+  haveEffect,
   hermit,
   inebrietyLimit,
   itemAmount,
@@ -218,6 +219,14 @@ export const BoozeDropQuest: Quest = {
           $effect`Uncucumbered`,
         ];
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
+        if (have($item`love song of disturbing obsession`))
+          use(
+            Math.min(
+              4 - Math.floor(haveEffect($effect`Withered Heart`) / 5),
+              itemAmount($item`love song of disturbing obsession`)
+            ),
+            $item`love song of disturbing obsession`
+          );
 
         if (have($familiar`Trick-or-Treating Tot`) && have($item`li'l ninja costume`)) {
           useFamiliar($familiar`Trick-or-Treating Tot`);
