@@ -82,7 +82,7 @@ import {
   sugarItemsAboutToBreak,
   unbreakableUmbrella,
 } from "../engine/outfit";
-import Macro from "../combat";
+import Macro, { mainStat } from "../combat";
 import { forbiddenEffects } from "../resources";
 import { mapMonster } from "libram/dist/resources/2020/Cartography";
 import {
@@ -205,6 +205,10 @@ function sellMiscellaneousItems(): void {
   items.forEach((it) => {
     if (itemAmount(it) > 1) autosell(it, itemAmount(it) - 1);
   });
+}
+
+function logMainStat(): void {
+  print(`Base Mainstat: ${myBasestat(mainStat)}`);
 }
 
 export const LevelingQuest: Quest = {
@@ -677,6 +681,7 @@ export const LevelingQuest: Quest = {
         }
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
       limit: { tries: 12 },
     },
@@ -753,6 +758,7 @@ export const LevelingQuest: Quest = {
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
       limit: { tries: 4 },
     },
@@ -914,6 +920,7 @@ export const LevelingQuest: Quest = {
         uneffect($effect`Jackasses' Symphony of Destruction`);
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
       limit: { tries: 1 },
     },
@@ -969,6 +976,7 @@ export const LevelingQuest: Quest = {
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
     },
     {
@@ -1010,6 +1018,7 @@ export const LevelingQuest: Quest = {
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
     },
     {
@@ -1027,6 +1036,7 @@ export const LevelingQuest: Quest = {
         if (have($effect`Beaten Up`)) cliExecute("hottub");
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
       combat: new CombatStrategy().macro(Macro.default(useCinch)),
       outfit: baseOutfit,
@@ -1111,6 +1121,7 @@ export const LevelingQuest: Quest = {
         if (have($item`SMOOCH coffee cup`)) chew($item`SMOOCH coffee cup`, 1);
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
     },
     {
@@ -1194,6 +1205,7 @@ export const LevelingQuest: Quest = {
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
       limit: { tries: 1 },
     },
@@ -1253,6 +1265,7 @@ export const LevelingQuest: Quest = {
         if (have($item`SMOOCH coffee cup`)) chew($item`SMOOCH coffee cup`, 1);
         sendAutumnaton();
         sellMiscellaneousItems();
+        logMainStat();
       },
       limit: { tries: 20 },
     },
