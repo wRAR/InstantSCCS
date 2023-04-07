@@ -745,6 +745,7 @@ export const LevelingQuest: Quest = {
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();
+        print(`Base Mys: ${myBasestat($stat`Mysticality`)}`);
       },
       limit: { tries: 4 },
     },
@@ -866,6 +867,7 @@ export const LevelingQuest: Quest = {
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();
+        print(`Base Mys: ${myBasestat($stat`Mysticality`)}`);
       },
     },
     {
@@ -1015,6 +1017,7 @@ export const LevelingQuest: Quest = {
         if (have($item`SMOOCH coffee cup`)) chew($item`SMOOCH coffee cup`, 1);
         sendAutumnaton();
         sellMiscellaneousItems();
+        print(`Base Mys: ${myBasestat($stat`Mysticality`)}`);
       },
     },
     {
@@ -1206,6 +1209,7 @@ export const LevelingQuest: Quest = {
         if (have($item`SMOOCH coffee cup`)) chew($item`SMOOCH coffee cup`, 1);
         sendAutumnaton();
         sellMiscellaneousItems();
+        print(`Base Mys: ${myBasestat($stat`Mysticality`)}`);
       },
       limit: { tries: 20 },
     },
