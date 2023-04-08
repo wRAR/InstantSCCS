@@ -154,7 +154,7 @@ export const HotResQuest: Quest = {
           $effect`Blood Bond`,
           $effect`Empathy`,
           $effect`Leash of Linguini`,
-          $effect`Robot Friends`,
+          // $effect`Robot Friends`,
         ];
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
         cliExecute("maximize hot res");
