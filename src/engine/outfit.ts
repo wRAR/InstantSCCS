@@ -1,5 +1,14 @@
 import { OutfitSpec } from "grimoire-kolmafia";
-import { cliExecute, equip, equippedItem, Familiar, Item, toInt } from "kolmafia";
+import {
+  cliExecute,
+  equip,
+  equippedItem,
+  Familiar,
+  familiarWeight,
+  Item,
+  itemAmount,
+  toInt,
+} from "kolmafia";
 import { $familiar, $familiars, $item, $skill, $slot, get, have, maxBy } from "libram";
 import { haveCBBIngredients } from "../lib";
 
@@ -55,11 +64,15 @@ function nanorhino(allowAttackingFamiliars = false): Familiar {
 }
 
 function cookbookbat(): Familiar {
-  return !haveCBBIngredients(true) ? $familiar`Cookbookbat` : $familiar.none;
+  return !haveCBBIngredients(true) || familiarWeight($familiar`Cookbookbat`) < 9
+    ? $familiar`Cookbookbat`
+    : $familiar.none;
 }
 
 function shorterOrderCook(allowAttackingFamiliars = true): Familiar {
-  return allowAttackingFamiliars && !have($item`short stack of pancakes`)
+  return allowAttackingFamiliars &&
+    !have($item`short stack of pancakes`) &&
+    get("_shortOrderCookCharge") - itemAmount($item`battle broom`) <= 10
     ? $familiar`Shorter-Order Cook`
     : $familiar.none;
 }
