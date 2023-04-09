@@ -519,6 +519,15 @@ export const LevelingQuest: Quest = {
       },
     },
     {
+      name: "Wish for Spit Upon",
+      completed: () =>
+        have($effect`Spit Upon`) ||
+        !have($item`cursed monkey's paw`) ||
+        forbiddenEffects.includes($effect`Spit Upon`) ||
+        get("instant_saveMonkeysPaw", false),
+      do: () => wishFor($effect`Spit Upon`, false),
+    },
+    {
       name: "Pull Snapper XP Buff",
       completed: () =>
         !canPull(toInt(snapperXpItem)) ||
