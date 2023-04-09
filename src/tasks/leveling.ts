@@ -339,6 +339,15 @@ export const LevelingQuest: Quest = {
       do: () => wishFor($effect`Different Way of Seeing Things`, false),
     },
     {
+      name: "Wish for Spit Upon",
+      completed: () =>
+        have($effect`Spit Upon`) ||
+        !have($item`cursed monkey's paw`) ||
+        forbiddenEffects.includes($effect`Spit Upon`) ||
+        get("instant_saveMonkeysPaw", false),
+      do: () => wishFor($effect`Spit Upon`, false),
+    },
+    {
       name: "Pull Non-Euclidean Angle",
       completed: () =>
         get("_roninStoragePulls").split(",").length >= 5 ||
