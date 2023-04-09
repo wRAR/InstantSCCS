@@ -80,12 +80,12 @@ export function main(command?: string): void {
     HPQuest,
     MoxieQuest,
     MuscleQuest,
+    WeaponDamageQuest,
+    SpellDamageQuest,
     FamiliarWeightQuest,
     NoncombatQuest,
     BoozeDropQuest,
     HotResQuest,
-    WeaponDamageQuest,
-    SpellDamageQuest,
     DonateQuest,
   ]);
   const engine = new Engine(tasks);
