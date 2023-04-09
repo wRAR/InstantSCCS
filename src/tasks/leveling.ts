@@ -1127,6 +1127,7 @@ export const LevelingQuest: Quest = {
     {
       name: "Witchess Witch",
       prepare: (): void => {
+        wishFor($effect`Spit Upon`);
         unbreakableUmbrella();
         cliExecute("umbrella dr");
         garbageShirt();
