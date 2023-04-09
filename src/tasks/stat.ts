@@ -11,7 +11,7 @@ import {
   uneffect,
 } from "libram";
 import { Quest } from "../engine/task";
-import { logTestSetup, tryAcquiringEffect } from "../lib";
+import { logTestSetup, tryAcquiringEffect, wishFor } from "../lib";
 
 export const HPQuest: Quest = {
   name: "HP",
@@ -125,6 +125,7 @@ export const MysticalityQuest: Quest = {
       name: "Test",
       completed: () => CommunityService.Mysticality.isDone(),
       prepare: (): void => {
+        wishFor($effect`Spit Upon`);
         const usefulEffects: Effect[] = [
           $effect`Big`,
           $effect`Feeling Excited`,
