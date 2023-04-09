@@ -588,6 +588,10 @@ function buildMiscList(): Requirement[] {
       why: "XP %",
       optional: true,
     },
+    {
+      thing: $item`wasabi marble soda`,
+      why: "Weapon Damage",
+    },
   ];
 }
 

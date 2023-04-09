@@ -13,6 +13,9 @@ import {
   myMeat,
   print,
   retrieveItem,
+  storageAmount,
+  takeStorage,
+  toInt,
   useSkill,
   visitUrl,
 } from "kolmafia";
@@ -116,6 +119,21 @@ export const WeaponDamageQuest: Quest = {
       outfit: { modifier: "HP 500max, Spooky Resistance", familiar: $familiar`Exotic Parrot` },
       effects: $effects`Astral Shell, Elemental Saucesphere`,
       limit: { tries: 3 },
+    },
+    {
+      name: "Pull Wasabi Marble Soda",
+      completed: () =>
+        get("_roninStoragePulls").split(",").length >= 5 ||
+        get("_roninStoragePulls")
+          .split(",")
+          .includes(toInt($item`wasabi marble soda`).toString()) ||
+        have($item`wasabi marble soda`) ||
+        have($effect`Wasabi With You`) ||
+        storageAmount($item`wasabi marble soda`) === 0,
+      do: (): void => {
+        takeStorage($item`wasabi marble soda`, 1);
+      },
+      limit: { tries: 1 },
     },
     {
       name: "Test",
