@@ -48,31 +48,31 @@ export const BoozeDropQuest: Quest = {
   name: "Booze Drop",
   completed: () => CommunityService.BoozeDrop.isDone(),
   tasks: [
-    {
-      name: "Configure Trainset",
-      completed: () =>
-        (getWorkshed() === $item`model train set` && !canConfigure()) || !TrainSet.have(),
-      do: (): void => {
-        const offset = get("trainsetPosition") % 8;
-        const newStations: TrainSet.Station[] = [];
-        const stations = [
-          Station.COAL_HOPPER, // double hot resist
-          Station.TOWER_FROZEN, // hot resist
-          Station.GAIN_MEAT, // meat
-          Station.TOWER_FIZZY, // mp regen
-          Station.BRAIN_SILO, // myst stats
-          Station.VIEWING_PLATFORM, // all stats
-          Station.WATER_BRIDGE, // +ML
-          Station.CANDY_FACTORY, // candies
-        ] as Cycle;
-        for (let i = 0; i < 8; i++) {
-          const newPos = (i + offset) % 8;
-          newStations[newPos] = stations[i];
-        }
-        setConfiguration(newStations as Cycle);
-      },
-      limit: { tries: 1 },
-    },
+    // {
+    //   name: "Configure Trainset",
+    //   completed: () =>
+    //     (getWorkshed() === $item`model train set` && !canConfigure()) || !TrainSet.have(),
+    //   do: (): void => {
+    //     const offset = get("trainsetPosition") % 8;
+    //     const newStations: TrainSet.Station[] = [];
+    //     const stations = [
+    //       Station.COAL_HOPPER, // double hot resist
+    //       Station.TOWER_FROZEN, // hot resist
+    //       Station.GAIN_MEAT, // meat
+    //       Station.TOWER_FIZZY, // mp regen
+    //       Station.BRAIN_SILO, // myst stats
+    //       Station.VIEWING_PLATFORM, // all stats
+    //       Station.WATER_BRIDGE, // +ML
+    //       Station.CANDY_FACTORY, // candies
+    //     ] as Cycle;
+    //     for (let i = 0; i < 8; i++) {
+    //       const newPos = (i + offset) % 8;
+    //       newStations[newPos] = stations[i];
+    //     }
+    //     setConfiguration(newStations as Cycle);
+    //   },
+    //   limit: { tries: 1 },
+    // },
     // {
     //   name: "Acquire Clover",
     //   completed: () => have($item`11-leaf clover`) || get("_cloversPurchased") >= 2,
@@ -92,36 +92,6 @@ export const BoozeDropQuest: Quest = {
     //   },
     //   limit: { tries: 1 },
     // },
-    {
-      name: "Fax Ungulith",
-      completed: () => get("_photocopyUsed"),
-      do: (): void => {
-        cliExecute("chat");
-        if (
-          (have($item`photocopied monster`) || faxbot($monster`ungulith`)) &&
-          get("photocopyMonster") === $monster`ungulith`
-        ) {
-          use($item`photocopied monster`);
-        }
-      },
-      outfit: () => ({
-        back: $item`vampyric cloake`,
-        weapon: $item`Fourth of May Cosplay Saber`,
-        offhand: $item`industrial fire extinguisher`,
-        familiar: $familiar`Cookbookbat`,
-        modifier: "myst",
-        avoid: sugarItemsAboutToBreak(),
-      }),
-      choices: { 1387: 3 },
-      combat: new CombatStrategy().macro(
-        Macro.trySkill($skill`Bowl Straight Up`)
-          .trySkill($skill`Become a Bat`)
-          .trySkill($skill`Fire Extinguisher: Polar Vortex`)
-          .trySkill($skill`Use the Force`)
-          .default()
-      ),
-      limit: { tries: 1 },
-    },
     {
       name: "Eat roasted vegetable of Jarlsberg",
       completed: () =>

@@ -77,8 +77,8 @@ export function main(command?: string): void {
     SpellDamageQuest,
     FamiliarWeightQuest,
     NoncombatQuest,
-    BoozeDropQuest,
     HotResQuest,
+    BoozeDropQuest,
     DonateQuest,
   ]);
   const engine = new Engine(tasks);
