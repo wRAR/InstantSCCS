@@ -145,6 +145,7 @@ const resources: Resource[] = [
     "instant_saveLocketFactoryWorker",
     () => "Do not reminisce a Factory Worker (female)"
   ),
+  new Resource("instant_saveLocketIceConcierge", () => "Do not reminisce an Ice Concierge"),
   new Resource("instant_savePumpkins", () => "Do not use harvested pumpkins"),
   new Resource(
     "instant_skipEarlyTrainsetMeat",
