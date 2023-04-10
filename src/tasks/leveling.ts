@@ -69,6 +69,7 @@ import { CombatStrategy } from "grimoire-kolmafia";
 import { haveCBBIngredients, targetBaseMyst, tryAcquiringEffect, wishFor } from "../lib";
 import {
   baseOutfit,
+  chooseFamiliar,
   docBag,
   garbageShirt,
   sugarItemsAboutToBreak,
@@ -968,6 +969,23 @@ export const LevelingQuest: Quest = {
       },
     },
     {
+      name: "Reminisce Ice concierge",
+      completed: () =>
+        CombatLoversLocket.monstersReminisced().includes($monster`ice concierge`) ||
+        !CombatLoversLocket.availableLocketMonsters().includes($monster`ice concierge`) ||
+        get("instant_saveLocketIceConcierge", false) ||
+        get("_saberForceUses") >= 5,
+      do: () => CombatLoversLocket.reminisce($monster`ice concierge`),
+      outfit: () => ({
+        weapon: $item`Fourth of May Cosplay Saber`,
+        familiar: chooseFamiliar(false),
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      choices: { 1387: 3 },
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Use the Force`).default()),
+      limit: { tries: 1 },
+    },
+    {
       name: "Powerlevel",
       completed: () =>
         myBasestat($stat`Mysticality`) >= targetBaseMyst - 15 &&
@@ -996,6 +1014,7 @@ export const LevelingQuest: Quest = {
         if (!have($effect`Everything Looks Red`) && !have($item`red rocket`)) {
           if (myMeat() >= 250) buy($item`red rocket`, 1);
         }
+        if (have($item`exotic travel brochure`)) use($item`exotic travel brochure`, 1);
       },
       outfit: baseOutfit,
       limit: { tries: 60 },
