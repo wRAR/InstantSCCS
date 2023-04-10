@@ -70,6 +70,7 @@ import { CombatStrategy } from "grimoire-kolmafia";
 import { haveCBBIngredients, targetBaseMyst, tryAcquiringEffect, wishFor } from "../lib";
 import {
   baseOutfit,
+  chooseFamiliar,
   docBag,
   garbageShirt,
   sugarItemsAboutToBreak,
@@ -724,6 +725,26 @@ export const LevelingQuest: Quest = {
         sendAutumnaton();
         sellMiscellaneousItems();
       },
+    },
+    {
+      name: "Reminisce Ice concierge",
+      completed: () =>
+        CombatLoversLocket.monstersReminisced().includes($monster`ice concierge`) ||
+        !CombatLoversLocket.availableLocketMonsters().includes($monster`ice concierge`) ||
+        get("instant_saveLocketIceConcierge", false) ||
+        get("_saberForceUses") >= 5,
+      do: () => CombatLoversLocket.reminisce($monster`ice concierge`),
+      outfit: () => ({
+        weapon: $item`Fourth of May Cosplay Saber`,
+        familiar: chooseFamiliar(false),
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      choices: { 1387: 3 },
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Use the Force`).default()),
+      post: (): void => {
+        if (have($item`exotic travel brochure`)) use($item`exotic travel brochure`, 1);
+      },
+      limit: { tries: 1 },
     },
     {
       name: "Snokebomb",
