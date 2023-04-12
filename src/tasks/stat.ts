@@ -1,17 +1,24 @@
-import { create, Effect, print } from "kolmafia";
+import { buy, create, Effect, myMaxhp, myMeat, print, restoreHp, use } from "kolmafia";
 import {
   $effect,
   $effects,
   $item,
   $items,
+  $monster,
+  $skill,
+  clamp,
+  CombatLoversLocket,
   CommunityService,
   ensureEffect,
   get,
   have,
   uneffect,
 } from "libram";
+import Macro from "../combat";
 import { Quest } from "../engine/task";
 import { logTestSetup, tryAcquiringEffect } from "../lib";
+import { CombatStrategy } from "grimoire-kolmafia";
+import { chooseFamiliar, sugarItemsAboutToBreak, unbreakableUmbrella } from "../engine/outfit";
 
 export const HPQuest: Quest = {
   name: "HP",
@@ -63,6 +70,30 @@ export const HPQuest: Quest = {
 export const MuscleQuest: Quest = {
   name: "Muscle",
   tasks: [
+    {
+      name: "Red Skeleton",
+      prepare: (): void => {
+        restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
+        unbreakableUmbrella();
+      },
+      completed: () =>
+        CombatLoversLocket.monstersReminisced().includes($monster`red skeleton`) ||
+        !CombatLoversLocket.availableLocketMonsters().includes($monster`red skeleton`) ||
+        get("instant_saveLocketRedSkeleton", false) ||
+        get("_saberForceUses") >= 5,
+      do: () => CombatLoversLocket.reminisce($monster`red skeleton`),
+      outfit: () => ({
+        weapon: $item`Fourth of May Cosplay Saber`,
+        familiar: chooseFamiliar(false),
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      choices: { 1387: 3 },
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Use the Force`).default()),
+      post: (): void => {
+        use($item`red box`, 1);
+      },
+      limit: { tries: 1 },
+    },
     {
       name: "Test",
       completed: () => CommunityService.Muscle.isDone(),
