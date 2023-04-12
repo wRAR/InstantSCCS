@@ -802,31 +802,6 @@ export const LevelingQuest: Quest = {
       limit: { tries: 50 },
     },
     {
-      name: "Red Skeleton",
-      ready: () => !have($effect`Everything Looks Yellow`),
-      prepare: (): void => {
-        restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
-        if (!have($item`yellow rocket`)) {
-          if (myMeat() < 250) throw new Error("Insufficient Meat to purchase yellow rocket!");
-          buy($item`yellow rocket`, 1);
-        }
-        unbreakableUmbrella();
-      },
-      completed: () =>
-        CombatLoversLocket.monstersReminisced().includes($monster`red skeleton`) ||
-        !CombatLoversLocket.availableLocketMonsters().includes($monster`red skeleton`) ||
-        get("instant_saveLocketRedSkeleton", false),
-      do: () => CombatLoversLocket.reminisce($monster`red skeleton`),
-      combat: new CombatStrategy().macro(Macro.tryItem($item`yellow rocket`).abort()),
-      outfit: () => baseOutfit(false),
-      post: (): void => {
-        use($item`red box`, 1);
-        sendAutumnaton();
-        sellMiscellaneousItems();
-      },
-      limit: { tries: 1 },
-    },
-    {
       name: "LOV Tunnel",
       prepare: (): void => {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
