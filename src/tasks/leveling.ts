@@ -988,7 +988,7 @@ export const LevelingQuest: Quest = {
     {
       name: "Powerlevel",
       completed: () =>
-        myBasestat($stat`Mysticality`) >= targetBaseMyst - 40 &&
+        myBasestat($stat`Mysticality`) >= targetBaseMyst - 50 &&
         (haveCBBIngredients(false) ||
           craftedCBBEffects.some((ef) => have(ef)) ||
           craftedCBBEffects.every((ef) => forbiddenEffects.includes(ef))) &&
