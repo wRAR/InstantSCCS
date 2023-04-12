@@ -127,6 +127,7 @@ import {
   chooseRift,
   rufusTarget,
 } from "libram/dist/resources/2023/ClosedCircuitPayphone";
+import { chooseFamiliar } from "../familiars";
 
 const useCinch = !get("instant_saveCinch", false);
 const baseBoozes = $items`bottle of rum, boxed wine, bottle of gin, bottle of vodka, bottle of tequila, bottle of whiskey`;
@@ -1079,17 +1080,16 @@ export const LevelingQuest: Quest = {
       completed: () =>
         CombatLoversLocket.monstersReminisced().includes($monster`red skeleton`) ||
         !CombatLoversLocket.availableLocketMonsters().includes($monster`red skeleton`) ||
-        get("instant_saveLocketRedSkeleton", false),
+        get("instant_saveLocketRedSkeleton", false) ||
+        get("_saberForceUses") >= 5,
       do: () => CombatLoversLocket.reminisce($monster`red skeleton`),
-      combat: new CombatStrategy().macro(
-        Macro.if_("!haseffect Everything Looks Yellow", Macro.tryItem($item`yellow rocket`))
-          .trySkill($skill`Feel Envy`)
-          .default(),
-      ),
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Use the Force`).default()),
       outfit: () => ({
-        ...baseOutfit(false),
-        modifier: `0.25 ${mainStatMaximizerStr}, 0.33 ML, -equip tinsel tights, -equip wad of used tape, -equip Kramco Sausage-o-Matic™`,
+        weapon: $item`Fourth of May Cosplay Saber`,
+        familiar: chooseFamiliar(false),
+        avoid: sugarItemsAboutToBreak(),
       }),
+      choices: { 1387: 3 },
       post: (): void => {
         use($item`red box`, 1);
         sendAutumnaton();
