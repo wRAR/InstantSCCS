@@ -158,6 +158,7 @@ export const MysticalityQuest: Quest = {
       prepare: (): void => {
         const usefulEffects: Effect[] = [
           $effect`Big`,
+          $effect`Disdain of She-Who-Was`,
           $effect`Feeling Excited`,
           $effect`Glittering Eyelashes`,
           $effect`Hulkien`,
