@@ -46,6 +46,7 @@ export function sugarItemsAboutToBreak(): Item[] {
   const sugarItems = [
     { id: 4180, item: $item`sugar shank` },
     { id: 4181, item: $item`sugar chapeau` },
+    { id: 4182, item: $item`sugar shorts` },
   ];
   return sugarItems
     .map((entry) => {
