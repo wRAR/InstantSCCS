@@ -93,36 +93,6 @@ export const BoozeDropQuest: Quest = {
     //   limit: { tries: 1 },
     // },
     {
-      name: "Fax Ungulith",
-      completed: () => get("_photocopyUsed"),
-      do: (): void => {
-        cliExecute("chat");
-        if (
-          (have($item`photocopied monster`) || faxbot($monster`ungulith`)) &&
-          get("photocopyMonster") === $monster`ungulith`
-        ) {
-          use($item`photocopied monster`);
-        }
-      },
-      outfit: () => ({
-        back: $item`vampyric cloake`,
-        weapon: $item`Fourth of May Cosplay Saber`,
-        offhand: $item`industrial fire extinguisher`,
-        familiar: $familiar`Cookbookbat`,
-        modifier: "myst",
-        avoid: sugarItemsAboutToBreak(),
-      }),
-      choices: { 1387: 3 },
-      combat: new CombatStrategy().macro(
-        Macro.trySkill($skill`Bowl Straight Up`)
-          .trySkill($skill`Become a Bat`)
-          .trySkill($skill`Fire Extinguisher: Polar Vortex`)
-          .trySkill($skill`Use the Force`)
-          .default()
-      ),
-      limit: { tries: 1 },
-    },
-    {
       name: "Eat roasted vegetable of Jarlsberg",
       completed: () =>
         have($effect`Wizard Sight`) ||
