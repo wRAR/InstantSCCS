@@ -1,10 +1,12 @@
 import { CombatStrategy, OutfitSpec } from "grimoire-kolmafia";
 import {
   buy,
+  cliExecute,
   create,
   Effect,
   elementalResistance,
   equippedItem,
+  faxbot,
   haveEffect,
   haveEquipped,
   inebrietyLimit,
@@ -22,6 +24,7 @@ import {
   restoreHp,
   restoreMp,
   retrieveItem,
+  use,
   useSkill,
   visitUrl,
 } from "kolmafia";
@@ -33,6 +36,7 @@ import {
   $familiar,
   $item,
   $location,
+  $monster,
   $skill,
   $slot,
   $stat,
@@ -40,6 +44,7 @@ import {
   clamp,
   Clan,
   CommunityService,
+  DaylightShavings,
   get,
   have,
   SongBoom,
@@ -210,6 +215,58 @@ export const WeaponDamageQuest: Quest = {
         outfit(get("instant_stickKnifeOutfit"));
       },
       limit: { tries: 1 },
+    },
+    {
+      name: "Fax Ungulith",
+      completed: () => get("_photocopyUsed") || have($item`corrupted marrow`),
+      do: (): void => {
+        if (have($item`photocopied monster`) && get("photocopyMonster") !== $monster`ungulith`) {
+          cliExecute("fax send");
+        }
+
+        // If we're whitelisted to the CSLooping clan, use that to grab the ungulith instead
+        if (Clan.getWhitelisted().find((c) => c.name.toLowerCase() === "csloopers unite")) {
+          Clan.with("CSLoopers Unite", () => cliExecute("fax receive"));
+        } else {
+          if (!visitUrl("messages.php?box=Outbox").includes("#3626664")) {
+            print("Requesting whitelist to CS clan...", "blue");
+            cliExecute("csend to 3626664 || Requesting access to CS clan");
+          }
+          cliExecute("chat");
+        }
+
+        if (
+          (have($item`photocopied monster`) || faxbot($monster`ungulith`)) &&
+          get("photocopyMonster") === $monster`ungulith`
+        ) {
+          use($item`photocopied monster`);
+        }
+      },
+      outfit: () => ({
+        hat:
+          DaylightShavings.nextBuff() === $effect`Musician's Musician's Moustache` &&
+          !DaylightShavings.hasBuff() &&
+          have($item`Daylight Shavings Helmet`)
+            ? $item`Daylight Shavings Helmet`
+            : undefined,
+        back: $item`vampyric cloake`,
+        weapon: $item`Fourth of May Cosplay Saber`,
+        offhand: have($skill`Double-Fisted Skull Smashing`)
+          ? $item`industrial fire extinguisher`
+          : undefined,
+        familiar: chooseFamiliar(false),
+        modifier: "myst",
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      choices: { 1387: 3 },
+      combat: new CombatStrategy().macro(
+        Macro.trySkill($skill`Bowl Straight Up`)
+          .trySkill($skill`Become a Bat`)
+          .trySkill($skill`Fire Extinguisher: Polar Vortex`)
+          .trySkill($skill`Use the Force`)
+          .default(),
+      ),
+      limit: { tries: 5 },
     },
     {
       name: "Cast Deep Dark Visions",
