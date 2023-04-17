@@ -5,6 +5,7 @@ import {
   create,
   Effect,
   elementalResistance,
+  equip,
   faxbot,
   haveEffect,
   inebrietyLimit,
@@ -31,6 +32,7 @@ import {
   $location,
   $monster,
   $skill,
+  $slot,
   CommunityService,
   get,
   have,
@@ -134,6 +136,20 @@ export const WeaponDamageQuest: Quest = {
           .trySkill($skill`Use the Force`)
           .default()
       ),
+      limit: { tries: 1 },
+    },
+    {
+      name: "Kung Fu",
+      prepare: (): void => {
+        equip($slot`weapon`, $item.none);
+        equip($slot`offhand`, $item.none);
+      },
+      completed: () => have($effect`Kung Fu Fighting`) || get("_snokebombUsed") >= 3,
+      do: $location`The Dire Warren`,
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Snokebomb`).abort()),
+      outfit: () => ({
+        avoid: sugarItemsAboutToBreak(),
+      }),
       limit: { tries: 1 },
     },
     {
