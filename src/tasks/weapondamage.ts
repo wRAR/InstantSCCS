@@ -5,6 +5,7 @@ import {
   create,
   Effect,
   elementalResistance,
+  equip,
   equippedItem,
   faxbot,
   haveEffect,
@@ -267,6 +268,25 @@ export const WeaponDamageQuest: Quest = {
           .default(),
       ),
       limit: { tries: 5 },
+    },
+    {
+      name: "Kung Fu",
+      prepare: (): void => {
+        restoreMp(50);
+        equip($slot`weapon`, $item.none);
+        equip($slot`offhand`, $item.none);
+      },
+      completed: () =>
+        have($effect`Kung Fu Fighting`) ||
+        get("_snokebombUsed") >= 3 ||
+        !have($skill`Kung Fu Hustler`) ||
+        !have($skill`Snokebomb`),
+      do: $location`The Dire Warren`,
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Snokebomb`).abort()),
+      outfit: () => ({
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      limit: { tries: 1 },
     },
     {
       name: "Cast Deep Dark Visions",
