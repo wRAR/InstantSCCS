@@ -39,14 +39,17 @@ export function sugarItemsAboutToBreak(): Item[] {
     { id: 4181, item: $item`sugar chapeau` },
     { id: 4182, item: $item`sugar shorts` },
   ];
-  return sugarItems
+  const itemsAboutToBreak: Item[] = sugarItems
     .map((entry) => {
       const { id, item } = entry;
       const itemAboutToBreak = parseInt(get(`sugarCounter${id.toString()}`), 10) >= 30;
       return itemAboutToBreak ? [item] : [];
     })
-    .reduce((a, b) => a.concat(b))
-    .concat([$item`sugar shield`]);
+    .reduce((a, b) => a.concat(b));
+  const otherItems: Item[] = [$item`sugar shield`];
+  // needed hotres +3 which is +1+sqrt(16)/2
+  if (get("sweat") < 16) otherItems.push($item`sugar shorts`);
+  return itemsAboutToBreak.concat(otherItems);
 }
 
 function nanorhino(allowAttackingFamiliars = false): Familiar {
