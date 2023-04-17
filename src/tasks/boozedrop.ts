@@ -48,31 +48,31 @@ export const BoozeDropQuest: Quest = {
   name: "Booze Drop",
   completed: () => CommunityService.BoozeDrop.isDone(),
   tasks: [
-    {
-      name: "Configure Trainset",
-      completed: () =>
-        (getWorkshed() === $item`model train set` && !canConfigure()) || !TrainSet.have(),
-      do: (): void => {
-        const offset = get("trainsetPosition") % 8;
-        const newStations: TrainSet.Station[] = [];
-        const stations = [
-          Station.COAL_HOPPER, // double hot resist
-          Station.TOWER_FROZEN, // hot resist
-          Station.GAIN_MEAT, // meat
-          Station.TOWER_FIZZY, // mp regen
-          Station.BRAIN_SILO, // myst stats
-          Station.VIEWING_PLATFORM, // all stats
-          Station.WATER_BRIDGE, // +ML
-          Station.CANDY_FACTORY, // candies
-        ] as Cycle;
-        for (let i = 0; i < 8; i++) {
-          const newPos = (i + offset) % 8;
-          newStations[newPos] = stations[i];
-        }
-        setConfiguration(newStations as Cycle);
-      },
-      limit: { tries: 1 },
-    },
+    // {
+    //   name: "Configure Trainset",
+    //   completed: () =>
+    //     (getWorkshed() === $item`model train set` && !canConfigure()) || !TrainSet.have(),
+    //   do: (): void => {
+    //     const offset = get("trainsetPosition") % 8;
+    //     const newStations: TrainSet.Station[] = [];
+    //     const stations = [
+    //       Station.COAL_HOPPER, // double hot resist
+    //       Station.TOWER_FROZEN, // hot resist
+    //       Station.GAIN_MEAT, // meat
+    //       Station.TOWER_FIZZY, // mp regen
+    //       Station.BRAIN_SILO, // myst stats
+    //       Station.VIEWING_PLATFORM, // all stats
+    //       Station.WATER_BRIDGE, // +ML
+    //       Station.CANDY_FACTORY, // candies
+    //     ] as Cycle;
+    //     for (let i = 0; i < 8; i++) {
+    //       const newPos = (i + offset) % 8;
+    //       newStations[newPos] = stations[i];
+    //     }
+    //     setConfiguration(newStations as Cycle);
+    //   },
+    //   limit: { tries: 1 },
+    // },
     // {
     //   name: "Acquire Clover",
     //   completed: () => have($item`11-leaf clover`) || get("_cloversPurchased") >= 2,
