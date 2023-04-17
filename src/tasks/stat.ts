@@ -1,4 +1,15 @@
-import { buy, create, Effect, myMaxhp, myMeat, print, restoreHp, use } from "kolmafia";
+import {
+  buy,
+  create,
+  Effect,
+  Item,
+  myMaxhp,
+  myMeat,
+  print,
+  restoreHp,
+  use,
+  useSkill,
+} from "kolmafia";
 import {
   $effect,
   $effects,
@@ -209,6 +220,19 @@ export const MoxieQuest: Quest = {
           create($item`oil of expertise`, 1);
         }
         ensureEffect($effect`Expert Oiliness`);
+        useSkill($skill`Summon Crimbo Candy`);
+        const crimboCandy: Item[] = [
+          $item`Crimbo peppermint bark`, // Mus
+          $item`Crimbo candied pecan`, // Mox
+          $item`Crimbo fudge`, // Mys
+        ];
+        crimboCandy.some((it) => {
+          if (have(it)) {
+            use(it, 1);
+            return true;
+          }
+          return false;
+        });
         const usefulEffects: Effect[] = [
           $effect`Amazing`,
           $effect`Big`,
