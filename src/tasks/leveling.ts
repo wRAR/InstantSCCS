@@ -987,6 +987,9 @@ export const LevelingQuest: Quest = {
             4 ||
           itemAmount($item`love song of disturbing obsession`) +
             Math.floor(haveEffect($effect`Withered Heart`) / 5) <
+            4 ||
+          itemAmount($item`love song of vague ambiguity`) +
+            Math.floor(haveEffect($effect`Broken Heart`) / 5) <
             4;
         while (needLoveSong && myMp() >= mpCost($skill`Summon Love Song`) + 300) {
           useSkill($skill`Summon Love Song`);
