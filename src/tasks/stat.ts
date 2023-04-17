@@ -4,6 +4,7 @@ import {
   create,
   Effect,
   haveEffect,
+  Item,
   itemAmount,
   print,
   Stat,
@@ -269,6 +270,19 @@ export const MoxieQuest: Quest = {
       prepare: (): void => {
         useBalancerForTest($stat`Moxie`);
         burnLibram(300);
+        useSkill($skill`Summon Crimbo Candy`);
+        const crimboCandy: Item[] = [
+          $item`Crimbo candied pecan`, // Mox
+          $item`Crimbo peppermint bark`, // Mus
+          $item`Crimbo fudge`, // Mys
+        ];
+        crimboCandy.some((it) => {
+          if (have(it)) {
+            use(it, 1);
+            return true;
+          }
+          return false;
+        });
         const usefulEffects: Effect[] = [
           $effect`Amazing`,
           $effect`Big`,
