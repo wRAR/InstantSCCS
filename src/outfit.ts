@@ -30,7 +30,7 @@ export function docBag(): void {
     equip($slot`acc3`, $item`Lil' Doctor™ bag`);
 }
 
-export function sugarItemsAboutToBreak(): Item[] {
+export function sugarItemsAboutToBreak(allowShield = false): Item[] {
   const sugarItems = [
     { id: 4180, item: $item`sugar shank` },
     { id: 4181, item: $item`sugar chapeau` },
@@ -43,7 +43,7 @@ export function sugarItemsAboutToBreak(): Item[] {
       return itemAboutToBreak ? [item] : [];
     })
     .reduce((a, b) => a.concat(b))
-    .concat([$item`sugar shield`]);
+    .concat(allowShield ? [] : [$item`sugar shield`]);
 }
 
 export function avoidDaylightShavingsHelm(): boolean {

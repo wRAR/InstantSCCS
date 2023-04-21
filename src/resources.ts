@@ -99,6 +99,7 @@ const encounterResources: Resource[] = [
     [],
     get("instant_saveBackups", false) ? 11 : 0,
   ),
+  new Resource("instant_saveLectures", "Do not use your Pocket Professor lectures"),
   new Resource(
     "instant_skipEarlyTrainsetMeat",
     "Do not spend an adventure in the Dire Warren pre-coil grabbing meat from the trainset",
