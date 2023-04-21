@@ -138,6 +138,7 @@ const resources: Resource[] = [
     get("instant_saveBackups", false) ? 11 : 0
   ),
   new Resource("instant_saveMayday", () => "Do not use your Mayday survival package"),
+  new Resource("instant_saveLectures", () => "Do not use your Pocket Professor lectures"),
   new Resource("instant_saveLocketRedSkeleton", () => "Do not reminisce a Red Skeleton"),
   new Resource("instant_saveLocketWitchessKing", () => "Do not reminisce a Witchess King"),
   new Resource("instant_saveLocketWitchessWitch", () => "Do not reminisce a Witchess Witch"),

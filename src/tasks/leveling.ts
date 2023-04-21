@@ -9,6 +9,7 @@ import {
   eat,
   Effect,
   effectModifier,
+  familiarWeight,
   getMonsters,
   haveEffect,
   inebrietyLimit,
@@ -41,6 +42,7 @@ import {
   use,
   useSkill,
   visitUrl,
+  weightAdjustment,
 } from "kolmafia";
 import {
   $effect,
@@ -970,7 +972,11 @@ export const LevelingQuest: Quest = {
         summonLibrams();
         restoreMp(50);
       },
-      ready: () => getKramcoWandererChance() >= 1.0,
+      ready: () =>
+        getKramcoWandererChance() >= 1.0 &&
+        (get("instant_saveLectures", false) ||
+          !have($familiar`Pocket Professor`) ||
+          get("_sausageFights") !== 1),
       completed: () => getKramcoWandererChance() < 1.0 || !have($item`Kramco Sausage-o-Matic™`),
       do: $location`Noob Cave`,
       outfit: () => ({
@@ -982,6 +988,48 @@ export const LevelingQuest: Quest = {
         sendAutumnaton();
         sellMiscellaneousItems();
         logMainStat();
+      },
+    },
+    {
+      name: "Kramco Professor Chain",
+      prepare: (): void => {
+        restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
+        garbageShirt();
+        usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        const usefulEffectsProf: Effect[] = [$effect`Empathy`, $effect`Leash of Linguini`];
+        usefulEffectsProf.forEach((ef) => tryAcquiringEffect(ef, true));
+        summonLibrams();
+        restoreMp(50);
+      },
+      ready: () => getKramcoWandererChance() >= 1.0 && get("_sausageFights") === 1,
+      completed: () =>
+        get("instant_saveLectures", false) ||
+        get("_sausageFights") > 1 ||
+        !have($familiar`Pocket Professor`) ||
+        !have($item`Kramco Sausage-o-Matic™`),
+      do: $location`Noob Cave`,
+      outfit: () => ({
+        acc1: $item`codpiece`,
+        acc2: $item`Cincho de Mayo`,
+        offhand: $item`Kramco Sausage-o-Matic™`,
+        familiar: $familiar`Pocket Professor`,
+        modifier:
+          "100 familiar weight, 0.25 mys, 0.33 ML, -equip tinsel tights, -equip wad of used tape",
+        avoid: sugarItemsAboutToBreak(true),
+      }),
+      combat: new CombatStrategy().macro(
+        Macro.trySkill($skill`lecture on relativity`).default(useCinch)
+      ),
+      limit: { tries: 1 },
+      post: (): void => {
+        sendAutumnaton();
+        sellMiscellaneousItems();
+        logMainStat();
+        print(
+          `Professor buffed weight: ${
+            familiarWeight($familiar`Pocket Professor`) + weightAdjustment()
+          }`
+        );
       },
     },
     {
