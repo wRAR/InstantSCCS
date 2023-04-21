@@ -852,7 +852,7 @@ export const LevelingQuest: Quest = {
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
         restoreMp(50);
       },
-      ready: () => getKramcoWandererChance() >= 1.0,
+      ready: () => getKramcoWandererChance() >= 1.0 && get("_sausageFights") !== 1,
       completed: () => getKramcoWandererChance() < 1.0 || !have($item`Kramco Sausage-o-Matic™`),
       do: $location`Noob Cave`,
       outfit: () => ({
@@ -860,6 +860,33 @@ export const LevelingQuest: Quest = {
         offhand: $item`Kramco Sausage-o-Matic™`,
       }),
       combat: new CombatStrategy().macro(Macro.default()),
+      post: (): void => {
+        sendAutumnaton();
+        sellMiscellaneousItems();
+        print(`Base Mys: ${myBasestat($stat`Mysticality`)}`);
+      },
+    },
+    {
+      name: "Kramco Professor Chain",
+      prepare: (): void => {
+        restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
+        garbageShirt();
+        usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
+        restoreMp(50);
+      },
+      ready: () => getKramcoWandererChance() >= 1.0 && get("_sausageFights") === 1,
+      completed: () => get("_sausageFights") > 1 || !have($item`Kramco Sausage-o-Matic™`),
+      do: $location`Noob Cave`,
+      outfit: () => ({
+        acc1: $item`codpiece`,
+        offhand: $item`Kramco Sausage-o-Matic™`,
+        familiar: $familiar`Pocket Professor`,
+        modifier:
+          "100 familiar weight, 0.25 mys, 0.33 ML, -equip tinsel tights, -equip wad of used tape",
+        avoid: sugarItemsAboutToBreak(true),
+      }),
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`lecture on relativity`).default()),
+      limit: { tries: 1 },
       post: (): void => {
         sendAutumnaton();
         sellMiscellaneousItems();

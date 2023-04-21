@@ -42,7 +42,7 @@ export function docBag(): void {
     equip($slot`acc3`, $item`Lil' Doctor™ bag`);
 }
 
-export function sugarItemsAboutToBreak(): Item[] {
+export function sugarItemsAboutToBreak(allowShield = false): Item[] {
   const sugarItems = [
     { id: 4180, item: $item`sugar shank` },
     { id: 4181, item: $item`sugar chapeau` },
@@ -55,7 +55,8 @@ export function sugarItemsAboutToBreak(): Item[] {
       return itemAboutToBreak ? [item] : [];
     })
     .reduce((a, b) => a.concat(b));
-  const otherItems: Item[] = [$item`sugar shield`];
+  const otherItems: Item[] = [];
+  if (!allowShield) otherItems.push($item`sugar shield`);
   // needed hotres +3 which is +1+sqrt(16)/2
   if (get("sweat") < 16) otherItems.push($item`sugar shorts`);
   return itemsAboutToBreak.concat(otherItems);
