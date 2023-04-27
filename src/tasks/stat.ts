@@ -32,6 +32,7 @@ import { Quest } from "../engine/task";
 import { logTestSetup, tryAcquiringEffect } from "../lib";
 import { CombatStrategy } from "grimoire-kolmafia";
 import { chooseFamiliar, sugarItemsAboutToBreak, unbreakableUmbrella } from "../engine/outfit";
+import { logTestSetup, tryAcquiringEffect, wishFor } from "../lib";
 
 export const HPQuest: Quest = {
   name: "HP",
