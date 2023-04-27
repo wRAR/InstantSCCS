@@ -210,6 +210,11 @@ export const MysticalityQuest: Quest = {
           maxTurns
         );
       },
+        // If it saves us >= 6 turns, try using a wish
+        if (CommunityService.WeaponDamage.actualCost() >= 7) wishFor($effect`Outer Wolf™`);
+        $effects`Spit Upon`.forEach((ef) => {
+          if (CommunityService.WeaponDamage.actualCost() >= 5) wishFor(ef); // The effects each save 2 turns on spelltest as well
+        });
       outfit: { modifier: "Mysticality, switch disembodied hand, -switch left-hand man" },
       post: (): void => {
         uneffect($effect`The Magical Mojomuscular Melody`);
