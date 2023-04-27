@@ -95,14 +95,14 @@ export const FamiliarWeightQuest: Quest = {
           use($item`box of Familiar Jacks`, 1);
           cliExecute("maximize familiar weight");
         }
-        if (have($item`love song of icy revenge`))
-          use(
-            Math.min(
-              4 - Math.floor(haveEffect($effect`Cold Hearted`) / 5),
-              itemAmount($item`love song of icy revenge`)
-            ),
-            $item`love song of icy revenge`
-          );
+        // if (have($item`love song of icy revenge`))
+          // use(
+            // Math.min(
+              // 4 - Math.floor(haveEffect($effect`Cold Hearted`) / 5),
+              // itemAmount($item`love song of icy revenge`)
+            // ),
+            // $item`love song of icy revenge`
+          // );
       },
       do: (): void => {
         const maxTurns = get("instant_famTestTurnLimit", 50);
