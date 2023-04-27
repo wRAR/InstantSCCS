@@ -753,7 +753,7 @@ export const LevelingQuest: Quest = {
         unbreakableUmbrella();
         restoreMp(50);
       },
-      completed: () => get("_snokebombUsed") >= 2,
+      completed: () => get("_snokebombUsed") >= 1,
       do: powerlevelingLocation(),
       combat: new CombatStrategy().macro(Macro.trySkill($skill`Snokebomb`).abort()),
       outfit: baseOutfit,
