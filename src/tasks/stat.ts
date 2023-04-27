@@ -122,14 +122,14 @@ export const MuscleQuest: Quest = {
         ) {
           create($item`philter of phorce`, 1);
         }
-        if (have($item`love song of vague ambiguity`))
-          use(
-            Math.min(
-              4 - Math.floor(haveEffect($effect`Broken Heart`) / 5),
-              itemAmount($item`love song of vague ambiguity`)
-            ),
-            $item`love song of vague ambiguity`
-          );
+        // if (have($item`love song of vague ambiguity`))
+          // use(
+            // Math.min(
+              // 4 - Math.floor(haveEffect($effect`Broken Heart`) / 5),
+              // itemAmount($item`love song of vague ambiguity`)
+            // ),
+            // $item`love song of vague ambiguity`
+          // );
         const usefulEffects: Effect[] = [
           $effect`Big`,
           $effect`Disdain of the War Snapper`,
