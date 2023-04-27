@@ -29,10 +29,10 @@ import {
 } from "libram";
 import Macro from "../combat";
 import { Quest } from "../engine/task";
-import { logTestSetup, tryAcquiringEffect } from "../lib";
+import { logTestSetup, tryAcquiringEffect, wishFor } from "../lib";
 import { CombatStrategy } from "grimoire-kolmafia";
 import { chooseFamiliar, sugarItemsAboutToBreak, unbreakableUmbrella } from "../engine/outfit";
-import { logTestSetup, tryAcquiringEffect, wishFor } from "../lib";
+
 
 export const HPQuest: Quest = {
   name: "HP",
