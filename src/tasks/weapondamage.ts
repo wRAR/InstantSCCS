@@ -22,6 +22,7 @@ import {
   use,
   useSkill,
   visitUrl,
+  getWorkshed,
 } from "kolmafia";
 import {
   $effect,
@@ -37,7 +38,14 @@ import {
   get,
   have,
   SongBoom,
+  TrainSet,
 } from "libram";
+import {
+  canConfigure,
+  Cycle,
+  setConfiguration,
+  Station,
+} from "libram/dist/resources/2022/TrainSet";
 import Macro from "../combat";
 import { sugarItemsAboutToBreak } from "../engine/outfit";
 import { Quest } from "../engine/task";
@@ -47,6 +55,31 @@ export const WeaponDamageQuest: Quest = {
   name: "Weapon Damage",
   completed: () => CommunityService.WeaponDamage.isDone(),
   tasks: [
+        {
+      name: "Configure Trainset",
+      completed: () =>
+        (getWorkshed() === $item`model train set` && !canConfigure()) || !TrainSet.have(),
+      do: (): void => {
+        const offset = get("trainsetPosition") % 8;
+        const newStations: TrainSet.Station[] = [];
+        const stations = [
+		  Station.VIEWING_PLATFORM, // all stats
+          Station.COAL_HOPPER, // double hot resist
+          Station.TOWER_FROZEN, // hot resist
+          Station.GAIN_MEAT, // meat
+          Station.TOWER_FIZZY, // mp regen
+          Station.BRAIN_SILO, // myst stats
+          Station.WATER_BRIDGE, // +ML
+          Station.CANDY_FACTORY, // candies
+        ] as Cycle;
+        for (let i = 0; i < 8; i++) {
+          const newPos = (i + offset) % 8;
+          newStations[newPos] = stations[i];
+        }
+        setConfiguration(newStations as Cycle);
+      },
+      limit: { tries: 1 },
+    },
     {
       name: "Drink Sockdollager",
       completed: () =>
