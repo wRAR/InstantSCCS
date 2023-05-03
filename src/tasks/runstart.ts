@@ -443,11 +443,17 @@ export const RunStartQuest: Quest = {
     {
       name: "Map Novelty Tropical Skeleton",
       prepare: (): void => {
-        if (!have($item`yellow rocket`) && !have($effect`Everything Looks Yellow`)) {
+        if (
+          !have($item`Jurassic Parka`) &&
+          !have($item`yellow rocket`) &&
+          !have($effect`Everything Looks Yellow`)
+        ) {
           if (myMeat() < 250) throw new Error("Insufficient Meat to purchase yellow rocket!");
           buy($item`yellow rocket`, 1);
         }
         unbreakableUmbrella();
+        if (have($item`Jurassic Parka`) && get("parkaMode") !== "spikolodon")
+          cliExecute("parka acid");
         if (haveEquipped($item`miniature crystal ball`)) equip($slot`familiar`, $item.none);
       },
       completed: () =>
@@ -465,11 +471,15 @@ export const RunStartQuest: Quest = {
         })(),
       do: () => mapMonster($location`The Skeleton Store`, $monster`novelty tropical skeleton`),
       combat: new CombatStrategy().macro(
-        Macro.if_($monster`novelty tropical skeleton`, Macro.tryItem($item`yellow rocket`)).abort()
+        Macro.if_(
+          $monster`novelty tropical skeleton`,
+          Macro.trySkill($skill`Spit jurassic acid`).tryItem($item`yellow rocket`)
+        ).abort()
       ),
       outfit: (): OutfitSpec => {
         return {
           offhand: $item`unbreakable umbrella`,
+          shirt: $item`Jurassic Parka`,
           acc1: $item`codpiece`,
           familiar: chooseFamiliar(false),
           modifier:
@@ -486,11 +496,17 @@ export const RunStartQuest: Quest = {
     {
       name: "Novelty Tropical Skeleton",
       prepare: (): void => {
-        if (!have($item`yellow rocket`) && !have($effect`Everything Looks Yellow`)) {
+        if (
+          !have($item`Jurassic Parka`) &&
+          !have($item`yellow rocket`) &&
+          !have($effect`Everything Looks Yellow`)
+        ) {
           if (myMeat() < 250) throw new Error("Insufficient Meat to purchase yellow rocket!");
           buy($item`yellow rocket`, 1);
         }
         unbreakableUmbrella();
+        if (have($item`Jurassic Parka`) && get("parkaMode") !== "spikolodon")
+          cliExecute("parka acid");
         if (get("_snokebombUsed") === 0) restoreMp(50);
         if (haveEquipped($item`miniature crystal ball`)) equip($slot`familiar`, $item.none);
       },
@@ -501,7 +517,10 @@ export const RunStartQuest: Quest = {
         ).length >= (have($skill`Map the Monsters`) ? 2 : 3),
       do: $location`The Skeleton Store`,
       combat: new CombatStrategy().macro(
-        Macro.if_($monster`novelty tropical skeleton`, Macro.tryItem($item`yellow rocket`))
+        Macro.if_(
+          $monster`novelty tropical skeleton`,
+          Macro.trySkill($skill`Spit jurassic acid`).tryItem($item`yellow rocket`)
+        )
           .trySkill($skill`Bowl a Curveball`)
           .trySkill($skill`Snokebomb`)
           .trySkill($skill`Monkey Slap`)
@@ -510,6 +529,7 @@ export const RunStartQuest: Quest = {
       outfit: (): OutfitSpec => {
         return {
           offhand: $item`unbreakable umbrella`,
+          shirt: $item`Jurassic Parka`,
           acc1: $item`codpiece`,
           acc2: $item`cursed monkey's paw`,
           familiar: chooseFamiliar(false),
