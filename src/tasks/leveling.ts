@@ -914,6 +914,7 @@ export const LevelingQuest: Quest = {
       prepare: (): void => {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
         unbreakableUmbrella();
+        garbageShirt();
         restoreMp(50);
         if (!have($effect`Everything Looks Red`) && !have($item`red rocket`)) {
           if (myMeat() >= 250) buy($item`red rocket`, 1);
@@ -1417,6 +1418,7 @@ export const LevelingQuest: Quest = {
       prepare: (): void => {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
         unbreakableUmbrella();
+        garbageShirt();
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef));
         burnLibram(300);
         restoreMp(50);
