@@ -852,7 +852,7 @@ export const LevelingQuest: Quest = {
       name: "Restore cinch",
       completed: () =>
         get("timesRested") >= totalFreeRests() - get("instant_saveFreeRests", 0) ||
-        get("_cinchUsed", 0) <= 95 ||
+        get("_cinchUsed", 0) <= 70 ||
         !useCinch,
       prepare: (): void => {
         if (have($item`Newbiesport™ tent`)) use($item`Newbiesport™ tent`);
