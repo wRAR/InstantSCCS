@@ -910,6 +910,15 @@ export const LevelingQuest: Quest = {
       limit: { tries: 1 },
     },
     {
+      name: "Acquire Lyle's Buff",
+      completed: () => get("_lyleFavored"),
+      do: (): void => {
+        tryAcquiringEffect($effect`Favored by Lyle`);
+        tryAcquiringEffect($effect`Starry-Eyed`);
+      },
+      limit: { tries: 1 },
+    },
+    {
       name: "Shadow Rift",
       prepare: (): void => {
         restoreHp(clamp(1000, myMaxhp() / 2, myMaxhp()));
@@ -1609,15 +1618,6 @@ export const LevelingQuest: Quest = {
         if (myMeat() < 500) throw new Error("Insufficient Meat to purchase Bee's Knees!");
         tryAcquiringEffect($effect`Ode to Booze`);
         visitUrl(`clan_viplounge.php?preaction=speakeasydrink&drink=5&pwd=${myHash()}`); // Bee's Knees
-      },
-      limit: { tries: 1 },
-    },
-    {
-      name: "Acquire Lyle's Buff",
-      completed: () => get("_lyleFavored"),
-      do: (): void => {
-        tryAcquiringEffect($effect`Favored by Lyle`);
-        tryAcquiringEffect($effect`Starry-Eyed`);
       },
       limit: { tries: 1 },
     },
