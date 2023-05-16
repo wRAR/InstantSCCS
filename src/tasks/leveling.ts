@@ -630,6 +630,7 @@ export const LevelingQuest: Quest = {
       combat: new CombatStrategy().macro(
         Macro.tryItem($item`blue rocket`)
           .tryItem($item`red rocket`)
+          .trySkill($skill`Feel Nostalgic`)
           .default()
       ),
       outfit: () => baseOutfit(false),
@@ -1071,7 +1072,7 @@ export const LevelingQuest: Quest = {
       },
       completed: () => get("_godLobsterFights") >= 3 || !have($familiar`God Lobster`),
       do: () => visitUrl("main.php?fightgodlobster=1"),
-      combat: new CombatStrategy().macro(Macro.default(useCinch)),
+      combat: new CombatStrategy().macro(Macro.trySkill($skill`Feel Nostalgic`).default(useCinch)),
       choices: { 1310: () => (have($item`God Lobster's Ring`) ? 2 : 3) }, // Get xp on last fight
       outfit: () => ({
         ...baseOutfit(),
