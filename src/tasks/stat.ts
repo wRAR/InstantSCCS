@@ -142,6 +142,7 @@ export const MuscleQuest: Quest = {
           $effect`Feeling Excited`,
           $effect`Go Get 'Em, Tiger!`,
           $effect`Hulkien`,
+          $effect`Lack of Body-Building`,
           $effect`Macaroni Coating`,
           $effect`Quiet Determination`,
           $effect`Power Ballad of the Arrowsmith`,
@@ -214,6 +215,7 @@ export const MysticalityQuest: Quest = {
           $effect`Saucemastery`,
           $effect`Song of Bravado`,
           $effect`Stevedave's Shanty of Superiority`,
+          $effect`We're All Made of Starfish`,
           $effect`Mystically Oiled`,
         ];
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
