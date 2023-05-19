@@ -1282,7 +1282,8 @@ export const LevelingQuest: Quest = {
         myBasestat($stat`Mysticality`) >= targetBaseMyst &&
         (get("_shatteringPunchUsed") >= 3 || !have($skill`Shattering Punch`)) &&
         (get("_gingerbreadMobHitUsed") || !have($skill`Gingerbread Mob Hit`)) &&
-        haveCBBIngredients(true),
+        haveCBBIngredients(true) &&
+        (have($item`short stack of pancakes`) || !have($familiar`Shorter-Order Cook`)),
       do: powerlevelingLocation(),
       combat: new CombatStrategy().macro(
         Macro.trySkill($skill`Feel Pride`)
