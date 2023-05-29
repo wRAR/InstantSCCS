@@ -401,6 +401,7 @@ export const BoozeDropQuest: Quest = {
 
         // If it saves us >= 6 turns, try using a wish
         if (CommunityService.BoozeDrop.actualCost() >= 7) wishFor($effect`Infernal Thirst`);
+        wishFor($effect`Frosty`);
       },
       completed: () => CommunityService.BoozeDrop.isDone(),
       do: (): void => {
