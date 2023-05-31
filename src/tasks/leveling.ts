@@ -594,7 +594,7 @@ export const LevelingQuest: Quest = {
       name: "Restore mp",
       completed: () =>
         get("timesRested") >= totalFreeRests() - get("instant_saveFreeRests", 0) ||
-        myMp() >= Math.min(200, myMaxmp()),
+        myMp() >= Math.min(200, myMaxmp() - 30),
       prepare: (): void => {
         if (have($item`Newbiesport™ tent`)) use($item`Newbiesport™ tent`);
       },
