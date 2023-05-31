@@ -19,6 +19,7 @@ import {
   myInebriety,
   myMaxhp,
   myMeat,
+  myMp,
   print,
   restoreHp,
   restoreMp,
@@ -378,11 +379,13 @@ export const BoozeDropQuest: Quest = {
           $effect`Nearly All-Natural`,
           $effect`The Spirit of Taking`,
           $effect`Singer's Faithful Ocelot`,
-          $effect`Spice Haze`,
           $effect`Steely-Eyed Squint`,
           $effect`Uncucumbered`,
+          $effect`Spice Haze`, // put this last
         ];
+        restoreMp(150);
         usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
+        print(`MP left: ${myMp()}`);
         burnLibram(300);
         if (have($item`love song of disturbing obsession`))
           use(
