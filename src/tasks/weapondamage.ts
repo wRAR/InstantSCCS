@@ -261,8 +261,7 @@ export const WeaponDamageQuest: Quest = {
       }),
       choices: { 1387: 3 },
       combat: new CombatStrategy().macro(
-        Macro.trySkill($skill`Bowl Straight Up`)
-          .trySkill($skill`Become a Bat`)
+        Macro.trySkill($skill`Become a Bat`)
           .trySkill($skill`Fire Extinguisher: Polar Vortex`)
           .trySkill($skill`Use the Force`)
           .default(),

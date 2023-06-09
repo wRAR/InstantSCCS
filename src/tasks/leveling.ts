@@ -1933,7 +1933,7 @@ export const LevelingQuest: Quest = {
           .trySkill($skill`Chest X-Ray`)
           .trySkill($skill`Shattering Punch`)
           .trySkill($skill`Gingerbread Mob Hit`)
-          .trySkill($skill`Bowl Sideways`)
+          // .trySkill($skill`Bowl Sideways`)
           .default(useCinch),
       ),
       choices: {
