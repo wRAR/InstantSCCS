@@ -462,29 +462,29 @@ export const LevelingQuest: Quest = {
       },
       limit: { tries: 1 },
     },
-    {
-      name: "Pull Pizza of Legend",
-      completed: () =>
-        inHardcore() || // Assume user consciously chose HC and accepts the consequences that come with it
-        have($item`Pizza of Legend`) ||
-        have($effect`Endless Drool`) ||
-        get("_roninStoragePulls")
-          .split(",")
-          .includes(toInt($item`Pizza of Legend`).toString()) ||
-        get("_instant_skipPizzaOfLegend", false),
-      do: (): void => {
-        if (storageAmount($item`Pizza of Legend`) === 0) {
-          print("Uh oh! You do not seem to have a Pizza of Legend in Hagnk's", "red");
-          print("Consider pulling something to make up for the turngen and 300%mox,", "red");
-          print(
-            "then type 'set _instant_skipPizzaOfLegend=true' before re-running instantsccs",
-            "red",
-          );
-        }
-        takeStorage($item`Pizza of Legend`, 1);
-      },
-      limit: { tries: 1 },
-    },
+    // {
+    //   name: "Pull Pizza of Legend",
+    //   completed: () =>
+    //     inHardcore() || // Assume user consciously chose HC and accepts the consequences that come with it
+    //     have($item`Pizza of Legend`) ||
+    //     have($effect`Endless Drool`) ||
+    //     get("_roninStoragePulls")
+    //       .split(",")
+    //       .includes(toInt($item`Pizza of Legend`).toString()) ||
+    //     get("_instant_skipPizzaOfLegend", false),
+    //   do: (): void => {
+    //     if (storageAmount($item`Pizza of Legend`) === 0) {
+    //       print("Uh oh! You do not seem to have a Pizza of Legend in Hagnk's", "red");
+    //       print("Consider pulling something to make up for the turngen and 300%mox,", "red");
+    //       print(
+    //         "then type 'set _instant_skipPizzaOfLegend=true' before re-running instantsccs",
+    //         "red",
+    //       );
+    //     }
+    //     takeStorage($item`Pizza of Legend`, 1);
+    //   },
+    //   limit: { tries: 1 },
+    // },
     {
       name: "Pull Daypass",
       completed: () =>
@@ -629,12 +629,6 @@ export const LevelingQuest: Quest = {
       limit: { tries: 1 },
     },
     {
-      name: "Eat Deep Dish",
-      completed: () => get("deepDishOfLegendEaten") || !have($item`Deep Dish of Legend`),
-      do: () => eat($item`Deep Dish of Legend`, 1),
-      limit: { tries: 1 },
-    },
-    {
       name: "Cast Prevent Scurvy",
       completed: () => !have($skill`Prevent Scurvy and Sobriety`) || get("_preventScurvy"),
       prepare: () => restoreMp(mpCost($skill`Prevent Scurvy and Sobriety`)),
@@ -710,10 +704,10 @@ export const LevelingQuest: Quest = {
       limit: { tries: 1 },
     },
     {
-      name: "Eat Pizza",
+      name: "Eat Deep Dish",
       ready: () => have($effect`Ready to Eat`), // only eat this after we red rocket
-      completed: () => get("pizzaOfLegendEaten") || !have($item`Pizza of Legend`),
-      do: () => eat($item`Pizza of Legend`, 1),
+      completed: () => get("deepDishOfLegendEaten") || !have($item`Deep Dish of Legend`),
+      do: () => eat($item`Deep Dish of Legend`, 1),
       limit: { tries: 1 },
     },
     {

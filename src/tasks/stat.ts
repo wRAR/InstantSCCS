@@ -309,6 +309,8 @@ export const MoxieQuest: Quest = {
         handleCustomPulls("instant_moxTestPulls", moxTestMaximizerString);
         if (have($skill`Acquire Rhinestones`)) useSkill($skill`Acquire Rhinestones`);
         if (have($item`rhinestone`)) use($item`rhinestone`, itemAmount($item`rhinestone`));
+        if (have($item`Deck of Every Card`) && !get("instant_saveDeck", false))
+          cliExecute("cheat fool");
       },
       do: (): void => {
         const maxTurns = get("instant_moxTestTurnLimit", 5);

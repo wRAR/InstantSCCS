@@ -1,6 +1,7 @@
 import { CombatStrategy } from "grimoire-kolmafia";
 import {
   buy,
+  create,
   drink,
   Effect,
   elementalResistance,
@@ -200,10 +201,19 @@ export const SpellDamageQuest: Quest = {
           !forbiddenEffects.includes($effect`Pisces in the Skyces`)
         )
           retrieveItem($item`tobiko marble soda`);
+        if (
+          !have($effect`Concentration`) &&
+          !have($item`cordial of concentration`) &&
+          have($item`scrumptious reagent`)
+        ) {
+          create($item`cordial of concentration`, 1);
+        }
+
         const usefulEffects: Effect[] = [
           $effect`AAA-Charged`,
           $effect`Arched Eyebrow of the Archmage`,
           $effect`Carol of the Hells`,
+          $effect`Concentration`,
           $effect`Cowrruption`,
           $effect`Destructive Resolve`,
           $effect`Imported Strength`,

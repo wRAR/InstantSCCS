@@ -275,18 +275,18 @@ export const BoozeDropQuest: Quest = {
       },
       limit: { tries: 1 },
     },
-    {
-      name: "Deck Wheel of Fortune",
-      completed: () =>
-        get("_deckCardsDrawn") > 5 ||
-        have($effect`Fortune of the Wheel`) ||
-        !have($item`Deck of Every Card`) ||
-        get("instant_saveDeck", false),
-      do: (): void => {
-        cliExecute("cheat fortune");
-      },
-      limit: { tries: 1 },
-    },
+    // {
+    //   name: "Deck Wheel of Fortune",
+    //   completed: () =>
+    //     get("_deckCardsDrawn") > 5 ||
+    //     have($effect`Fortune of the Wheel`) ||
+    //     !have($item`Deck of Every Card`) ||
+    //     get("instant_saveDeck", false),
+    //   do: (): void => {
+    //     cliExecute("cheat fortune");
+    //   },
+    //   limit: { tries: 1 },
+    // },
     {
       name: "Power Seed",
       completed: () =>
