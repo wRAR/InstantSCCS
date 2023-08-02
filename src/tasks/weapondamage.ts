@@ -309,7 +309,11 @@ export const WeaponDamageQuest: Quest = {
       name: "Test",
       prepare: (): void => {
         if (have($item`SongBoom™ BoomBox`)) SongBoom.setSong("These Fists Were Made for Punchin'");
-        if (!have($item`goofily-plumed helmet`)) buy($item`goofily-plumed helmet`, 1);
+        if (
+          !have($item`goofily-plumed helmet`) &&
+          !forbiddenEffects.includes($effect`Weapon of Mass Destruction`)
+        )
+          buy($item`goofily-plumed helmet`, 1);
         if (
           have($item`Ye Wizard's Shack snack voucher`) &&
           !forbiddenEffects.includes($effect`Wasabi With You`)
