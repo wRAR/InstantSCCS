@@ -1959,7 +1959,7 @@ export const LevelingQuest: Quest = {
         if (have($item`SMOOCH coffee cup`)) chew($item`SMOOCH coffee cup`, 1);
         sendAutumnaton();
         sellMiscellaneousItems();
-        burnLibram(500);
+        // burnLibram(500);
         refillLatte();
         logMainStat();
       },
