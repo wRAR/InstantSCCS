@@ -27,6 +27,7 @@ import {
   Monster,
   mpCost,
   myBasestat,
+  myClass,
   myFamiliar,
   myHash,
   myHp,
@@ -55,6 +56,7 @@ import {
   weightAdjustment,
 } from "kolmafia";
 import {
+  $class,
   $coinmaster,
   $effect,
   $effects,
@@ -266,7 +268,9 @@ export function bestShadowRift(): Location {
             .map((m) =>
               [
                 ...Object.keys(itemDrops(m)).map((s) => toItem(s)),
-                m === $monster`shadow guy` && have($skill`Just the Facts`)
+                m === $monster`shadow guy` &&
+                have($skill`Just the Facts`) &&
+                myClass() === $class`Sauceror`
                   ? $item`pocket wish`
                   : $item.none,
               ].filter((i) => i !== $item.none),
