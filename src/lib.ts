@@ -498,6 +498,12 @@ export function chooseLibram(): Skill {
     ((!have($item`green candy heart`) && !have($effect`Heart of Green`)) ||
       (!have($item`lavender candy heart`) && !have($effect`Heart of Lavender`)));
 
+  const needBricko =
+    have($skill`Summon BRICKOs`) &&
+    !CommunityService.WeaponDamage.isDone() &&
+    get("_brickoFights") < 1 &&
+    (itemAmount($item`BRICKO eye brick`) < 2 || itemAmount($item`BRICKO brick`) < 4);
+
   if (
     have($skill`Summon Resolutions`) &&
     ((!have($item`resolution: be happier`) && !have($effect`Joyful Resolve`)) ||
@@ -506,8 +512,12 @@ export function chooseLibram(): Skill {
     return $skill`Summon Resolutions`;
   } else if (needCandyHeart) {
     return $skill`Summon Candy Heart`;
+  } else if (needBricko) {
+    return $skill`Summon BRICKOs`;
   } else if (needLoveSong) {
     return $skill`Summon Love Song`;
+  } else if (get("_brickoEyeSummons") < 3) {
+    return $skill`Summon BRICKOs`;
   } else if (
     have($skill`Summon Resolutions`) &&
     !have($item`resolution: be kinder`) &&

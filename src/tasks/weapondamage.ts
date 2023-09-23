@@ -11,6 +11,7 @@ import {
   haveEffect,
   haveEquipped,
   inebrietyLimit,
+  itemAmount,
   myBasestat,
   myClass,
   myHash,
@@ -267,6 +268,27 @@ export const WeaponDamageQuest: Quest = {
           .default(),
       ),
       limit: { tries: 5 },
+    },
+    {
+      name: "BRICKO ooze + Kung Fu",
+      prepare: (): void => {
+        equip($slot`weapon`, $item.none);
+        equip($slot`offhand`, $item.none);
+      },
+      completed: () =>
+        // have($effect`Kung Fu Fighting`) ||
+        have($effect`Sweet and Green`) ||
+        itemAmount($item`BRICKO eye brick`) < 1 ||
+        itemAmount($item`BRICKO brick`) < 2,
+      do: (): void => {
+        create($item`BRICKO ooze`);
+        use($item`BRICKO ooze`);
+      },
+      combat: new CombatStrategy().macro(Macro.default()),
+      outfit: () => ({
+        avoid: sugarItemsAboutToBreak(),
+      }),
+      limit: { tries: 2 },
     },
     {
       name: "Kung Fu",
