@@ -492,6 +492,10 @@ export function chooseLibram(): Skill {
   const needLoveSong =
     have($skill`Summon Love Song`) &&
     (needVagueAmbiguity || needIcyRevenge || needDisturbingObsession || needSmolderingPassion);
+  if (needVagueAmbiguity) print("needVagueAmbiguity");
+  if (needIcyRevenge) print("needIcyRevenge");
+  if (needDisturbingObsession) print("needDisturbingObsession");
+  if (needSmolderingPassion) print("needSmolderingPassion");
 
   const needCandyHeart =
     have($skill`Summon Candy Heart`) &&
@@ -503,6 +507,7 @@ export function chooseLibram(): Skill {
     !CommunityService.WeaponDamage.isDone() &&
     get("_brickoFights") < 1 &&
     (itemAmount($item`BRICKO eye brick`) < 2 || itemAmount($item`BRICKO brick`) < 4);
+  if (needBricko) print("needBricko");
 
   if (
     have($skill`Summon Resolutions`) &&
