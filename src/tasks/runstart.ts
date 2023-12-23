@@ -273,6 +273,19 @@ export const RunStartQuest: Quest = {
       limit: { tries: 1 },
     },
     {
+      name: "Summon Sugar Sheets with Clip Art",
+      completed: () =>
+        !have($skill`Summon Sugar Sheets`) ||
+        get("instant_saveSugar", false) ||
+        get("tomeSummons") >= 1,
+      do: (): void => {
+        const sheetsToMake = 1;
+        restoreMp(2 * sheetsToMake);
+        useSkill($skill`Summon Sugar Sheets`, sheetsToMake);
+      },
+      limit: { tries: 1 },
+    },
+    {
       name: "Fold Sugar Sheets",
       completed: () => !have($item`sugar sheet`),
       do: (): void => {
